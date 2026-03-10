@@ -47,7 +47,6 @@ const PrincipalStudentProfileScreen: React.FC<PrincipalStudentProfileScreenProps
     const insights = MOCK_TOPIC_INSIGHTS[selectedSubject] || [];
     return (
       <div className="h-full flex flex-col relative overflow-hidden bg-white animate-fade-in">
-        <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
         <header className="fixed top-0 left-0 right-0 z-50 bg-white h-32 shadow-lg flex items-center px-6">
           <button onClick={() => setSelectedSubject(null)} className="p-3 bg-transparent text-[#2563eb] rounded-2xl shadow-lg border-2 border-[#2563eb]/20 active:scale-95 active:bg-[#2563eb]/10 transition-all mr-4"><svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="3"><path d="M19 12H5M12 19l-7-7 7-7" /></svg></button>
           <div className="flex flex-col text-[#2563eb]">
@@ -87,8 +86,6 @@ const PrincipalStudentProfileScreen: React.FC<PrincipalStudentProfileScreenProps
 
   return (
     <div className="h-full flex flex-col relative overflow-hidden bg-white animate-fade-in">
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
-
       <header className="fixed top-0 left-0 right-0 z-50 bg-white h-32 shadow-lg flex items-center px-6">
         <button 
           onClick={onBack} 

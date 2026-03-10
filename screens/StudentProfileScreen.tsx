@@ -212,9 +212,6 @@ const StudentProfileScreen: React.FC<StudentProfileScreenProps> = ({ preferences
 
   return (
     <div className="h-full flex flex-col relative animate-fade-in overflow-hidden">
-      {/* Background */}
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
-      
       <DashboardHeader preferences={preferences} title="Student Profile" />
 
       <div className="flex-1 overflow-y-auto relative z-10 px-6 pb-20">

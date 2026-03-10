@@ -20,7 +20,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onSuccess, onBack, onGoToSign
   };
 
   return (
-    <div className="h-full flex flex-col relative overflow-hidden bg-gradient-to-b from-[#2563eb] from-0% via-[#2563eb] via-50% to-white to-75%">
+    <div className="h-full flex flex-col relative overflow-hidden">
       <div className="pt-12 px-6 relative z-10">
         <button 
           onClick={onBack}
@@ -51,7 +51,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onSuccess, onBack, onGoToSign
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="w-full p-4 rounded-xl border-2 border-white/20 bg-white text-black placeholder:text-slate-400 outline-none transition-all font-medium"
+            className="w-full p-4 rounded-xl border-2 border-white/20 bg-[#f0f7ff] text-black placeholder:text-slate-400 outline-none transition-all font-medium"
             required
           />
         </div>
@@ -64,7 +64,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onSuccess, onBack, onGoToSign
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full p-4 pr-12 rounded-xl border-2 border-white/20 bg-white text-black placeholder:text-slate-400 outline-none transition-all font-medium"
+              className="w-full p-4 pr-12 rounded-xl border-2 border-white/20 bg-[#f0f7ff] text-black placeholder:text-slate-400 outline-none transition-all font-medium"
               required
             />
             <button 

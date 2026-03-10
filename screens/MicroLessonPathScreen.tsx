@@ -94,10 +94,7 @@ const MicroLessonPathScreen: React.FC<MicroLessonPathScreenProps> = ({
   ];
 
   return (
-    <div className="h-full flex flex-col relative animate-fade-in overflow-hidden">
-      {/* GLOBAL STATIC BACKGROUND */}
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
-
+    <div className="h-full flex flex-col relative animate-fade-in overflow-hidden bg-[#eff6ff]">
       <DashboardHeader 
         preferences={preferences} 
         title={`${subjectName} – ${unitName}`} 
@@ -107,7 +104,7 @@ const MicroLessonPathScreen: React.FC<MicroLessonPathScreenProps> = ({
       <div className="px-6 py-4 flex items-center justify-between sticky top-[136px] bg-transparent z-10">
         <button 
           onClick={onBack}
-          className="flex items-center bg-white border-2 border-[#2563eb] text-[#2563eb] px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest active:scale-[0.98] active:bg-blue-50 transition-all shadow-sm"
+          className="flex items-center bg-[#f0f7ff] border-2 border-[#2563eb] text-[#2563eb] px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest active:scale-[0.98] active:bg-blue-50 transition-all shadow-sm"
         >
           <svg viewBox="0 0 24 24" className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
             <path d="M15 18l-6-6 6-6" />
@@ -159,8 +156,8 @@ const MicroLessonPathScreen: React.FC<MicroLessonPathScreenProps> = ({
                         isCompleted 
                           ? 'bg-[#2563eb] border-blue-100 active:bg-blue-700' 
                           : isInProgress 
-                            ? 'bg-white border-[#2563eb] animate-pulse active:bg-blue-50' 
-                            : 'bg-white border-slate-100 opacity-60 active:bg-slate-50'
+                            ? 'bg-[#f0f7ff] border-[#2563eb] animate-pulse active:bg-blue-50' 
+                            : 'bg-[#f0f7ff] border-blue-50 opacity-60 active:bg-blue-50'
                       }`}
                     >
                       {isCompleted ? (
@@ -236,7 +233,7 @@ const MicroLessonPathScreen: React.FC<MicroLessonPathScreenProps> = ({
                       tool.action();
                       setIsToolsOpen(false);
                     }}
-                    className="absolute w-36 p-3 bg-white rounded-xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)] border border-blue-50 flex items-center space-x-3 active:scale-95 transition-transform pointer-events-auto hover:border-blue-200 group"
+                    className="absolute w-36 p-3 bg-[#f0f7ff] rounded-xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)] border border-blue-100 flex items-center space-x-3 active:scale-95 transition-transform pointer-events-auto hover:border-blue-200 group"
                   >
                     <div className="text-[#2563eb] group-hover:scale-110 transition-transform">
                       {tool.icon}
@@ -265,12 +262,12 @@ const MicroLessonPathScreen: React.FC<MicroLessonPathScreenProps> = ({
                 <motion.div 
                   animate={{ y: isToolsOpen ? -15 : isHovered ? -6 : 0 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
-                  className="w-full h-12 bg-slate-100 rounded-sm shadow-sm border-t border-slate-200" 
+                  className="w-full h-12 bg-blue-50 rounded-sm shadow-sm border-t border-blue-100" 
                 />
                 <motion.div 
                   animate={{ y: isToolsOpen ? -10 : isHovered ? -3 : 0 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
-                  className="w-full h-12 bg-white rounded-sm shadow-sm border-t border-slate-100 -mt-10" 
+                  className="w-full h-12 bg-[#f0f7ff] rounded-sm shadow-sm border-t border-blue-50 -mt-10" 
                 />
               </div>
             </div>

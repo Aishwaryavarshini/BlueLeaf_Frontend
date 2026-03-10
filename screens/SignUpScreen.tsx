@@ -73,7 +73,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ label, value, options, onCh
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full p-4 rounded-xl border-2 cursor-pointer flex justify-between items-center transition-all font-medium ${
           isInstitution 
-            ? 'bg-white border-slate-200 text-slate-900' 
+            ? 'bg-[#f0f7ff] border-blue-100 text-slate-900' 
             : 'bg-white/10 border-white/20 text-white'
         }`}
       >
@@ -105,19 +105,19 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ label, value, options, onCh
           />
           {/* Implementation Rule: 100% Solid white dropdown sitting above UI */}
           <div 
-            className="absolute left-0 right-0 mt-2 bg-white !opacity-100 border-2 border-slate-200 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.2)] z-[130] overflow-hidden pointer-events-auto ring-1 ring-slate-100 animate-slide-down-fast"
+            className="absolute left-0 right-0 mt-2 bg-[#f0f7ff] !opacity-100 border-2 border-blue-100 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.2)] z-[130] overflow-hidden pointer-events-auto ring-1 ring-blue-50 animate-slide-down-fast"
             style={{ 
               animation: 'none',
               transform: 'translateY(0)'
             }}
           >
-            <div className="max-h-60 overflow-y-auto bg-white !opacity-100">
+            <div className="max-h-60 overflow-y-auto bg-[#f0f7ff] !opacity-100">
               {options.map((option) => (
                 <div
                   key={option}
                   onClick={() => handleSelect(option)}
-                  className={`p-4 hover:bg-slate-50 transition-colors cursor-pointer text-slate-700 font-bold border-b border-slate-50 last:border-0 ${
-                    value === option ? 'bg-blue-50 text-blue-700' : ''
+                  className={`p-4 hover:bg-blue-50 transition-colors cursor-pointer text-slate-700 font-bold border-b border-blue-50 last:border-0 ${
+                    value === option ? 'bg-blue-100 text-blue-700' : ''
                   }`}
                 >
                   {typeof option === 'number' ? `Class ${option}` : option}
@@ -162,7 +162,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ onSuccess, onBack }) => {
   };
 
   return (
-    <div className={`h-full flex flex-col transition-all duration-700 relative overflow-hidden bg-gradient-to-b from-[#2563eb] from-0% via-[#2563eb] via-50% to-white to-75%`}>
+    <div className={`h-full flex flex-col transition-all duration-700 relative overflow-hidden`}>
       
       {/* Playful background animation for Student mode */}
       {!isInstitution && (
@@ -192,11 +192,11 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ onSuccess, onBack }) => {
 
       {/* Account Type Toggle */}
       <div className="px-6 mt-8 relative z-10">
-        <div className={`flex p-1 rounded-2xl transition-colors duration-500 bg-white/10 backdrop-blur-sm border border-white/10`}>
+        <div className={`flex p-1 rounded-2xl transition-colors duration-500 bg-blue-100/10 backdrop-blur-sm border border-white/10`}>
           <button
             onClick={() => setRole('student')}
             className={`flex-1 py-2.5 text-sm font-bold rounded-xl transition-all duration-300 ${
-              role === 'student' ? 'bg-white text-[#2563eb] shadow-sm' : 'text-white/60'
+              role === 'student' ? 'bg-[#f0f7ff] text-[#2563eb] shadow-sm' : 'text-white/60'
             }`}
           >
             Student
@@ -204,7 +204,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ onSuccess, onBack }) => {
           <button
             onClick={() => setRole('institution')}
             className={`flex-1 py-2.5 text-sm font-bold rounded-xl transition-all duration-300 ${
-              role === 'institution' ? 'bg-white text-[#2563eb] shadow-sm' : 'text-white/60'
+              role === 'institution' ? 'bg-[#f0f7ff] text-[#2563eb] shadow-sm' : 'text-white/60'
             }`}
           >
             Institution
@@ -299,7 +299,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ onSuccess, onBack }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className={`w-full p-4 rounded-xl border-2 transition-all outline-none font-medium text-black bg-white ${isInstitution ? 'border-slate-200 focus:border-[#2563eb]' : 'border-white/20'}`}
+            className={`w-full p-4 rounded-xl border-2 transition-all outline-none font-medium text-black bg-[#f0f7ff] ${isInstitution ? 'border-blue-100 focus:border-[#2563eb]' : 'border-white/20'}`}
             required
           />
         </div>
@@ -312,7 +312,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ onSuccess, onBack }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Create a password"
-              className={`w-full p-4 pr-12 rounded-xl border-2 transition-all outline-none font-medium text-black bg-white ${isInstitution ? 'border-slate-200 focus:border-[#2563eb]' : 'border-white/20'}`}
+              className={`w-full p-4 pr-12 rounded-xl border-2 transition-all outline-none font-medium text-black bg-[#f0f7ff] ${isInstitution ? 'border-blue-100 focus:border-[#2563eb]' : 'border-white/20'}`}
               required
             />
             <button 

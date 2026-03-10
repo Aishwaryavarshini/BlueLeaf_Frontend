@@ -293,12 +293,9 @@ const LessonTeachingScreen: React.FC<LessonTeachingScreenProps> = ({ preferences
 
   return (
     <div className="h-full flex flex-col relative animate-fade-in overflow-hidden">
-      {/* GLOBAL STATIC BACKGROUND */}
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
-
-      <header className="bg-white px-6 pt-12 pb-6 border-b border-slate-100 sticky top-0 z-30 shadow-md">
+      <header className="bg-[#f0f7ff] px-6 pt-12 pb-6 border-b border-blue-100 sticky top-0 z-30 shadow-md">
         <div className="flex items-center">
-          <button onClick={onBack} className="p-3 bg-white border-2 border-[#2563eb] text-[#2563eb] rounded-2xl active:scale-[0.98] active:bg-blue-50 transition-all mr-4 shadow-sm">
+          <button onClick={onBack} className="p-3 bg-[#f0f7ff] border-2 border-[#2563eb] text-[#2563eb] rounded-2xl active:scale-[0.98] active:bg-blue-50 transition-all mr-4 shadow-sm">
             <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
@@ -332,7 +329,7 @@ const LessonTeachingScreen: React.FC<LessonTeachingScreenProps> = ({ preferences
               </button>
             </div>
 
-            <div className="bg-white rounded-[3rem] p-10 border-2 border-[#2563eb]/10 shadow-xl">
+            <div className="bg-[#f0f7ff] rounded-[3rem] p-10 border-2 border-[#2563eb]/10 shadow-xl">
               <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-6">Core Concept</h3>
               <div className="text-slate-800 font-medium leading-relaxed text-lg">
                 {renderLightDualExplanation(lessonContent.core_concept)}
@@ -343,7 +340,7 @@ const LessonTeachingScreen: React.FC<LessonTeachingScreenProps> = ({ preferences
               <h3 className="text-[10px] font-black text-white uppercase tracking-[0.3em] ml-4 drop-shadow-md">Practical Examples</h3>
               <div className="grid grid-cols-1 gap-6">
                 {lessonContent.examples.map((ex, i) => (
-                  <div key={i} className="bg-white border-2 border-[#2563eb]/10 p-8 rounded-[2.5rem] text-slate-700 shadow-sm">
+                  <div key={i} className="bg-[#f0f7ff] border-2 border-[#2563eb]/10 p-8 rounded-[2.5rem] text-slate-700 shadow-sm">
                     <span className="text-[#2563eb] font-black uppercase tracking-widest text-[10px] block mb-4">Example {i+1}</span> 
                     <div className="text-base font-bold leading-relaxed">{renderLightDualExplanation(ex)}</div>
                   </div>
@@ -364,7 +361,7 @@ const LessonTeachingScreen: React.FC<LessonTeachingScreenProps> = ({ preferences
             </div>
 
             <div className="bg-amber-50 rounded-[3rem] p-10 border-2 border-amber-100 text-center shadow-sm">
-              <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-sm border border-amber-100 text-3xl">💡</div>
+              <div className="w-16 h-16 bg-[#f0f7ff] rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-sm border border-amber-100 text-3xl">💡</div>
               <h3 className="text-[10px] font-black text-amber-600 uppercase tracking-[0.3em] mb-4">Reflect & Respond</h3>
               <p className="text-slate-800 font-bold text-lg mb-6 leading-tight">{lessonContent.interactive_challenge}</p>
               <p className="text-[9px] text-slate-400 uppercase tracking-[0.25em] font-black">Type your answer below</p>
@@ -376,7 +373,7 @@ const LessonTeachingScreen: React.FC<LessonTeachingScreenProps> = ({ preferences
           {messages.map((msg, i) => (
             <div key={i} className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} animate-fade-in`}>
               <div className={`relative max-w-[85%] p-8 rounded-[2.5rem] shadow-lg leading-relaxed text-base ${
-                msg.sender === 'user' ? 'bg-white border-2 border-[#2563eb] text-[#2563eb] rounded-tr-none font-bold' : 'bg-white text-slate-700 rounded-tl-none border-2 border-slate-100'
+                msg.sender === 'user' ? 'bg-[#f0f7ff] border-2 border-[#2563eb] text-[#2563eb] rounded-tr-none font-bold' : 'bg-[#f0f7ff] text-slate-700 rounded-tl-none border-2 border-blue-50'
               }`}>
                 {msg.text}
                 {msg.sender === 'ai' && !msg.isStreaming && (
@@ -392,7 +389,7 @@ const LessonTeachingScreen: React.FC<LessonTeachingScreenProps> = ({ preferences
           ))}
           {isAILoading && !messages[messages.length-1]?.isStreaming && (
             <div className="flex justify-start animate-fade-in pl-4">
-               <div className="bg-white p-6 rounded-[2.5rem] border-2 border-slate-100 flex space-x-2 items-center shadow-sm">
+               <div className="bg-[#f0f7ff] p-6 rounded-[2.5rem] border-2 border-blue-50 flex space-x-2 items-center shadow-sm">
                  <div className="w-2 h-2 bg-[#2563eb] rounded-full animate-bounce"></div>
                  <div className="w-2 h-2 bg-[#2563eb] rounded-full animate-bounce delay-100"></div>
                  <div className="w-2 h-2 bg-[#2563eb] rounded-full animate-bounce delay-200"></div>
@@ -403,11 +400,11 @@ const LessonTeachingScreen: React.FC<LessonTeachingScreenProps> = ({ preferences
         <div ref={chatEndRef} className="pb-10" />
       </div>
 
-      <div className="p-6 bg-white border-t border-slate-100 pb-10 sticky bottom-0 z-30 shadow-[0_-10px_40px_rgba(0,0,0,0.03)]">
+      <div className="p-6 bg-[#f0f7ff] border-t border-blue-100 pb-10 sticky bottom-0 z-30 shadow-[0_-10px_40px_rgba(0,0,0,0.03)]">
         <div className="flex items-center space-x-4">
           <button 
             onClick={startVoiceMode} 
-            className="w-14 h-14 bg-white border-2 border-[#2563eb] text-[#2563eb] rounded-2xl flex items-center justify-center active:scale-[0.98] active:bg-blue-50 transition-all shadow-sm"
+            className="w-14 h-14 bg-[#f0f7ff] border-2 border-[#2563eb] text-[#2563eb] rounded-2xl flex items-center justify-center active:scale-[0.98] active:bg-blue-50 transition-all shadow-sm"
           >
             <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="23" /></svg>
           </button>
@@ -418,7 +415,7 @@ const LessonTeachingScreen: React.FC<LessonTeachingScreenProps> = ({ preferences
               onChange={(e) => setChatInput(e.target.value)} 
               onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()} 
               placeholder={placeholderText} 
-              className="w-full bg-slate-50 border-2 border-slate-100 rounded-[1.75rem] py-4 pl-6 pr-14 text-base focus:border-[#2563eb] focus:bg-white outline-none transition-all placeholder:text-slate-400 font-bold" 
+              className="w-full bg-blue-50/50 border-2 border-blue-100 rounded-[1.75rem] py-4 pl-6 pr-14 text-base focus:border-[#2563eb] focus:bg-[#f0f7ff] outline-none transition-all placeholder:text-slate-400 font-bold" 
             />
             <button 
               onClick={handleSendMessage} 

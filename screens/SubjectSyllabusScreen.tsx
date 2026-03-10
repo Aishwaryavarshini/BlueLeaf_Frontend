@@ -86,12 +86,9 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
   };
 
   return (
-    <div className="h-full flex flex-col relative overflow-hidden bg-white">
-      {/* STATIC APP BACKGROUND */}
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
-
+    <div className="h-full flex flex-col relative overflow-hidden bg-[#eff6ff]">
       {/* FIXED HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white h-32 shadow-lg flex items-center px-6 justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#f0f7ff] h-32 shadow-lg flex items-center px-6 justify-between">
         <div className="flex items-center">
           <button 
             onClick={onBack}
@@ -119,7 +116,7 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
       <div className="flex-1 overflow-y-auto px-6 pt-40 pb-24 relative z-10">
         {units.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-32 text-center space-y-6 animate-fade-in">
-            <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-[2.5rem] flex items-center justify-center text-white border border-white/30 shadow-xl">
+            <div className="w-20 h-20 bg-[#f0f7ff]/20 backdrop-blur-md rounded-[2.5rem] flex items-center justify-center text-white border border-white/30 shadow-xl">
                <span className="text-4xl font-black opacity-80">!</span>
             </div>
             <div className="space-y-2">
@@ -130,7 +127,7 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
         ) : (
           <div className="space-y-8 animate-slide-up">
             {units.map((unit) => (
-              <div key={unit.id} className="bg-white/95 p-6 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
+              <div key={unit.id} className="bg-[#f0f7ff]/95 p-6 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
                 {/* Unit Header */}
                 <div className="flex justify-between items-center pb-4 border-b border-slate-50">
                   <div className="flex items-center space-x-3">
@@ -146,7 +143,7 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
                 {/* Lessons List */}
                 <div className="space-y-3">
                   {unit.lessons.map(lesson => (
-                    <div key={lesson.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-3xl border border-slate-100 group active:border-blue-200 transition-all">
+                    <div key={lesson.id} className="flex items-center justify-between p-4 bg-blue-50/50 rounded-3xl border border-blue-100 group active:border-blue-200 transition-all">
                       <div className="flex items-center space-x-3">
                          <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                          <p className="text-xs font-bold text-slate-600 truncate max-w-[160px]">{lesson.title}</p>
@@ -158,13 +155,13 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
                       </div>
                     </div>
                   ))}
-                  <button className="w-full py-3 border-2 border-dashed border-slate-200 rounded-3xl text-[9px] font-black uppercase text-slate-400 hover:border-blue-300 hover:text-blue-400 transition-all">+ Add Micro-lesson</button>
+                  <button className="w-full py-3 border-2 border-dashed border-blue-200 rounded-3xl text-[9px] font-black uppercase text-blue-400 hover:border-blue-300 hover:bg-blue-50 transition-all">+ Add Micro-lesson</button>
                 </div>
               </div>
             ))}
             
             <div className="pt-10 flex flex-col items-center space-y-6">
-              <button className="w-full py-5 bg-white border-2 border-[#2563eb] text-[#2563eb] rounded-[2rem] font-black uppercase text-xs tracking-widest shadow-lg active:scale-95 transition-all">+ Add Unit</button>
+              <button className="w-full py-5 bg-[#f0f7ff] border-2 border-[#2563eb] text-[#2563eb] rounded-[2rem] font-black uppercase text-xs tracking-widest shadow-lg active:scale-95 transition-all">+ Add Unit</button>
               <button onClick={() => setDeleteDialog(true)} className="p-4 bg-red-50 text-red-500 rounded-2xl active:bg-red-100 active:scale-90 transition-all shadow-sm">
                 <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
               </button>
@@ -177,7 +174,7 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
       {isAddSheetOpen && (
         <div className="fixed inset-0 z-[100] flex items-end justify-center">
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-fade-in" onClick={closeAddSheet} />
-          <div className="relative w-full max-h-[90%] bg-white rounded-t-[3.5rem] shadow-2xl animate-slide-up flex flex-col overflow-hidden">
+          <div className="relative w-full max-h-[90%] bg-[#f0f7ff] rounded-t-[3.5rem] shadow-2xl animate-slide-up flex flex-col overflow-hidden">
             <div className="w-full flex justify-center pt-5 pb-2 shrink-0"><div className="w-14 h-1.5 bg-slate-100 rounded-full" /></div>
             
             <div className="flex-1 overflow-y-auto px-8 py-6 pb-12">
@@ -200,7 +197,7 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
                     <div className="space-y-4">
                       <button 
                         onClick={() => setUploadFlow('ebook')}
-                        className="w-full p-6 bg-white border-2 border-[#2563eb] rounded-[2.5rem] flex items-center space-x-6 text-left active:bg-[#2563eb] active:border-white transition-all group"
+                        className="w-full p-6 bg-[#f0f7ff] border-2 border-[#2563eb] rounded-[2.5rem] flex items-center space-x-6 text-left active:bg-[#2563eb] active:border-white transition-all group"
                       >
                         <div className="w-14 h-14 bg-blue-50 rounded-3xl flex items-center justify-center text-3xl group-active:scale-90 transition-transform">📚</div>
                         <div className="flex-1">
@@ -211,7 +208,7 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
 
                       <button 
                         onClick={() => setUploadFlow('notes_step1')}
-                        className="w-full p-6 bg-white border-2 border-[#2563eb] rounded-[2.5rem] flex items-center space-x-6 text-left active:bg-[#2563eb] active:border-white transition-all group"
+                        className="w-full p-6 bg-[#f0f7ff] border-2 border-[#2563eb] rounded-[2.5rem] flex items-center space-x-6 text-left active:bg-[#2563eb] active:border-white transition-all group"
                       >
                         <div className="w-14 h-14 bg-indigo-50 rounded-3xl flex items-center justify-center text-3xl group-active:scale-90 transition-transform">📝</div>
                         <div className="flex-1">
@@ -249,13 +246,13 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
                       <div className="grid grid-cols-2 gap-4">
                         <button 
                           onClick={() => setUploadFlow('notes_step2')}
-                          className="py-8 bg-white border-2 border-[#2563eb] rounded-[2.5rem] font-black text-[#2563eb] text-sm uppercase active:bg-[#2563eb] active:text-white transition-all shadow-sm"
+                          className="py-8 bg-[#f0f7ff] border-2 border-[#2563eb] rounded-[2.5rem] font-black text-[#2563eb] text-sm uppercase active:bg-[#2563eb] active:text-white transition-all shadow-sm"
                         >
                           No
                         </button>
                         <button 
                           onClick={() => setShowNote('Please upload this using E-Book (Full Chapter Set).')}
-                          className={`py-8 bg-white border-2 border-[#2563eb] rounded-[2.5rem] font-black text-[#2563eb] text-sm uppercase active:bg-[#2563eb] active:text-white transition-all shadow-sm ${showNote ? 'ring-4 ring-blue-500/10 border-blue-600' : ''}`}
+                          className={`py-8 bg-[#f0f7ff] border-2 border-[#2563eb] rounded-[2.5rem] font-black text-[#2563eb] text-sm uppercase active:bg-[#2563eb] active:text-white transition-all shadow-sm ${showNote ? 'ring-4 ring-blue-500/10 border-blue-600' : ''}`}
                         >
                           Yes
                         </button>
@@ -276,7 +273,7 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
                       <div className="relative isolate">
                         <button 
                           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                          className="w-full p-5 bg-slate-50 border-2 border-slate-100 rounded-[2rem] flex items-center justify-between font-black text-slate-700 active:border-[#2563eb] transition-all"
+                          className="w-full p-5 bg-blue-50/50 border-2 border-blue-100 rounded-[2rem] flex items-center justify-between font-black text-slate-700 active:border-[#2563eb] transition-all"
                         >
                           <span>{selectedLessonParent}</span>
                           <svg viewBox="0 0 24 24" className={`w-5 h-5 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="3"><path d="M6 9l6 6 6-6" /></svg>
@@ -287,13 +284,13 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
                             {/* Interaction Rule: Full-screen invisible backdrop to block interaction and close on outside click */}
                             <div className="fixed inset-0 z-[120] bg-transparent pointer-events-auto" onClick={() => setIsDropdownOpen(false)} />
                             {/* Implementation Rule: 100% Solid white dropdown sitting above UI */}
-                            <div className="absolute left-0 right-0 mt-3 bg-white border-2 border-slate-100 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.25)] z-[130] overflow-hidden isolate pointer-events-auto !opacity-100">
-                              <div className="bg-white !opacity-100">
+                            <div className="absolute left-0 right-0 mt-3 bg-[#f0f7ff] border-2 border-blue-100 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.25)] z-[130] overflow-hidden isolate pointer-events-auto !opacity-100">
+                              <div className="bg-[#f0f7ff] !opacity-100">
                                 {['None', ...units.map(u => u.title)].map(opt => (
                                   <button 
                                     key={opt}
                                     onClick={() => { setSelectedLessonParent(opt); setIsDropdownOpen(false); }}
-                                    className="w-full p-5 text-left font-black text-slate-700 hover:bg-blue-50 hover:text-[#2563eb] transition-colors border-b last:border-0 border-slate-50 uppercase text-[11px] tracking-widest bg-white !opacity-100"
+                                    className="w-full p-5 text-left font-black text-slate-700 hover:bg-blue-50 hover:text-[#2563eb] transition-colors border-b last:border-0 border-blue-50 uppercase text-[11px] tracking-widest bg-[#f0f7ff] !opacity-100"
                                   >
                                     {opt}
                                   </button>
@@ -312,7 +309,7 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
                             value={microLessonTitle}
                             onChange={(e) => setMicroLessonTitle(e.target.value)}
                             placeholder="e.g. Fundamental Theorem"
-                            className="w-full p-5 bg-slate-50 border-2 border-slate-100 rounded-[2rem] outline-none focus:border-[#2563eb] transition-all font-black text-slate-800 placeholder:text-slate-300"
+                            className="w-full p-5 bg-blue-50/50 border-2 border-blue-100 rounded-[2rem] outline-none focus:border-[#2563eb] transition-all font-black text-slate-800 placeholder:text-slate-300"
                           />
                         </div>
                       )}
@@ -360,7 +357,7 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
       {deleteDialog && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-8 animate-fade-in">
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setDeleteDialog(false)} />
-          <div className="relative w-full max-w-sm bg-white rounded-[3.5rem] p-10 text-center space-y-8 shadow-2xl animate-slide-up">
+          <div className="relative w-full max-w-sm bg-[#f0f7ff] rounded-[3.5rem] p-10 text-center space-y-8 shadow-2xl animate-slide-up">
             <div className="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto text-4xl font-black shadow-inner">!</div>
             <h4 className="text-xl font-black text-slate-900 uppercase leading-tight tracking-tight">Are you sure you want to delete the entire book content?</h4>
             <div className="flex flex-col space-y-3">
@@ -372,7 +369,7 @@ const SubjectSyllabusScreen: React.FC<SubjectSyllabusScreenProps> = ({
               </button>
               <button 
                 onClick={() => setDeleteDialog(false)}
-                className="w-full py-5 bg-white border-2 border-slate-100 text-slate-400 rounded-[2rem] font-black uppercase text-xs tracking-widest active:scale-95 transition-all"
+                className="w-full py-5 bg-[#f0f7ff] border-2 border-blue-100 text-slate-400 rounded-[2rem] font-black uppercase text-xs tracking-widest active:scale-95 transition-all"
               >
                 Cancel
               </button>

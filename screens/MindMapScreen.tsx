@@ -49,6 +49,8 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [editingNodeId, setEditingNodeId] = useState<string | null>(null);
+  const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [editValue, setEditValue] = useState('');
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -80,20 +82,6 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
         };
       });
 
-      // Assign sides to branches
-      const branches = processedNodes.filter((n: any) => n.type === 'branch');
-      branches.forEach((branch: any, index: number) => {
-        branch.side = index % 2 === 0 ? 'left' : 'right';
-      });
-
-      // Assign sides to leaves based on their parent branch
-      processedNodes.forEach((node: any) => {
-        if (node.type === 'leaf') {
-          const parent = processedNodes.find((p: any) => p.id === node.parentId);
-          if (parent) node.side = parent.side;
-        }
-      });
-
       setNodes(processedNodes);
       setLinks(data.links);
     } catch (e) {
@@ -105,11 +93,9 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
   };
 
   // Layout constants
-  const NODE_WIDTH = 180;
-  const NODE_HEIGHT = 60;
-  const VERTICAL_SPACING = 100;
-  const HORIZONTAL_SPACING = 300;
-  const SUB_NODE_OFFSET = 120;
+  const VERTICAL_SPACING = 250;
+  const BRANCH_SPACING = 300;
+  const LEAF_SPACING = 180;
 
   // Calculate positions
   const nodePositions = useMemo(() => {
@@ -117,35 +103,27 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
     const coreNode = nodes.find(n => n.type === 'core');
     if (!coreNode) return positions;
 
-    // Center
-    positions[coreNode.id] = { x: 0, y: 0 };
+    // Center Top
+    positions[coreNode.id] = { x: 0, y: -VERTICAL_SPACING };
 
-    const leftBranches = nodes.filter(n => n.type === 'branch' && n.side === 'left');
-    const rightBranches = nodes.filter(n => n.type === 'branch' && n.side === 'right');
+    const branches = nodes.filter(n => n.type === 'branch');
+    const totalBranchWidth = (branches.length - 1) * BRANCH_SPACING;
+    const branchStartY = 0;
 
-    const calculateColumn = (branches: Node[], side: 'left' | 'right') => {
-      const totalHeight = (branches.length - 1) * VERTICAL_SPACING;
-      const startY = -totalHeight / 2;
-      const x = side === 'left' ? -HORIZONTAL_SPACING : HORIZONTAL_SPACING;
+    branches.forEach((branch, i) => {
+      const branchX = Math.round(-totalBranchWidth / 2 + i * BRANCH_SPACING);
+      positions[branch.id] = { x: branchX, y: branchStartY };
 
-      branches.forEach((branch, i) => {
-        const y = startY + i * VERTICAL_SPACING;
-        positions[branch.id] = { x, y };
+      // Position leaves for this branch
+      const leaves = nodes.filter(n => n.type === 'leaf' && n.parentId === branch.id);
+      const totalLeafWidth = (leaves.length - 1) * LEAF_SPACING;
+      const leafY = branchStartY + VERTICAL_SPACING;
 
-        // Position leaves for this branch
-        const leaves = nodes.filter(n => n.type === 'leaf' && n.parentId === branch.id);
-        const leafX = side === 'left' ? x - SUB_NODE_OFFSET : x + SUB_NODE_OFFSET;
-        const leafTotalHeight = (leaves.length - 1) * 40;
-        const leafStartY = y - leafTotalHeight / 2;
-
-        leaves.forEach((leaf, j) => {
-          positions[leaf.id] = { x: leafX, y: leafStartY + j * 40 };
-        });
+      leaves.forEach((leaf, j) => {
+        const leafX = Math.round(branchX - totalLeafWidth / 2 + j * LEAF_SPACING);
+        positions[leaf.id] = { x: leafX, y: leafY };
       });
-    };
-
-    calculateColumn(leftBranches, 'left');
-    calculateColumn(rightBranches, 'right');
+    });
 
     return positions;
   }, [nodes]);
@@ -171,9 +149,39 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
     setZoom(prev => Math.min(Math.max(prev * delta, 0.5), 2));
   };
 
+  // Helper to check if a link is part of the active path
+  const isLinkActive = (fromId: string, toId: string) => {
+    const targetId = hoveredNodeId || selectedNodeId;
+    if (!targetId) return false;
+
+    // Path from core to target (Ancestors)
+    let currentId: string | undefined = targetId;
+    while (currentId) {
+      const parentId = nodes.find(n => n.id === currentId)?.parentId;
+      if (parentId === fromId && currentId === toId) return true;
+      currentId = parentId;
+    }
+
+    // Path from selected node to its immediate children (Discovery)
+    if (selectedNodeId === fromId) return true;
+    
+    return false;
+  };
+
   const handleNodeClick = (node: Node) => {
-    setEditingNodeId(node.id);
-    setEditValue(node.label);
+    if (selectedNodeId === node.id) {
+      // "Opens up the next textbox" - find first child and select it
+      const firstChild = nodes.find(n => n.parentId === node.id);
+      if (firstChild) {
+        setSelectedNodeId(firstChild.id);
+      } else {
+        // If no child, enter edit mode
+        setEditingNodeId(node.id);
+        setEditValue(node.label);
+      }
+    } else {
+      setSelectedNodeId(node.id);
+    }
   };
 
   const saveNodeEdit = () => {
@@ -193,17 +201,17 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
   ];
 
   return (
-    <div className="h-screen w-full flex flex-col bg-slate-50 overflow-hidden relative font-sans">
+    <div className="h-screen w-full flex flex-col bg-[#eff6ff] overflow-hidden relative font-sans">
       {/* Background Texture */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0" 
            style={{ backgroundImage: 'radial-gradient(#2563eb 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       
       {/* Top Bar */}
-      <header className="bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between z-30 shadow-sm">
+      <header className="bg-[#f0f7ff] border-b border-blue-100 px-6 py-4 flex items-center justify-between z-30 shadow-sm">
         <div className="flex items-center space-x-4">
           <button 
             onClick={onBack}
-            className="p-2 hover:bg-slate-50 rounded-xl transition-colors text-slate-600"
+            className="p-2 hover:bg-blue-50 rounded-xl transition-colors text-slate-600"
           >
             <ArrowLeft size={20} strokeWidth={2.5} />
           </button>
@@ -215,16 +223,16 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
 
         {/* Lesson Selector */}
         <div className="relative group">
-          <button className="flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-white transition-all">
+          <button className="flex items-center space-x-2 bg-blue-50/50 border border-blue-100 px-4 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-white transition-all">
             <span>{selectedLesson}</span>
             <ChevronDown size={14} className="text-slate-400" />
           </button>
-          <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-slate-100 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+          <div className="absolute top-full left-0 mt-2 w-48 bg-[#f0f7ff] border border-blue-100 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
             {['Whole Lesson', 'Micro Lesson 1', 'Micro Lesson 2'].map(lesson => (
               <button 
                 key={lesson}
                 onClick={() => setSelectedLesson(lesson)}
-                className="w-full text-left px-4 py-3 text-xs font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 first:rounded-t-xl last:rounded-b-xl transition-colors"
+                className="w-full text-left px-4 py-3 text-xs font-bold text-slate-600 hover:bg-blue-100 hover:text-blue-600 first:rounded-t-xl last:rounded-b-xl transition-colors"
               >
                 {lesson}
               </button>
@@ -237,7 +245,7 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
             <Save size={14} />
             <span>Save</span>
           </button>
-          <div className="flex items-center space-x-2 bg-slate-100 p-1 rounded-xl">
+          <div className="flex items-center space-x-2 bg-blue-100/50 p-1 rounded-xl">
             <button 
               onClick={() => setIsManualMode(!isManualMode)}
               className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all ${!isManualMode ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400'}`}
@@ -272,28 +280,135 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
         >
           <div className="relative w-[1px] h-[1px]">
             {/* Connectors Layer */}
-            <svg className="absolute overflow-visible pointer-events-none" style={{ left: 0, top: 0 }}>
+            <svg className="absolute inset-0 overflow-visible pointer-events-none" style={{ width: '1px', height: '1px' }}>
+              <defs>
+                <marker
+                  id="arrowhead"
+                  markerWidth="10"
+                  markerHeight="7"
+                  refX="10"
+                  refY="3.5"
+                  orient="auto"
+                >
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb" />
+                </marker>
+              </defs>
               {links.map((link, i) => {
+                const fromNode = nodes.find(n => n.id === link.from);
+                const toNode = nodes.find(n => n.id === link.to);
+                if (!fromNode || !toNode) return null;
+
                 const fromPos = nodePositions[link.from];
                 const toPos = nodePositions[link.to];
                 if (!fromPos || !toPos) return null;
 
-                // Smooth curve path
+                // Determine node dimensions for edge calculation
+                const getDims = (type: string) => {
+                  if (type === 'core') return { w: 256, h: 96 };
+                  if (type === 'branch') return { w: 192, h: 56 };
+                  return { w: 160, h: 40 };
+                };
+
+                const fromDims = getDims(fromNode.type);
+                const toDims = getDims(toNode.type);
+
                 const dx = toPos.x - fromPos.x;
-                const midX = fromPos.x + dx / 2;
+                const dy = toPos.y - fromPos.y;
+
+                let startX, startY, endX, endY, path;
+
+                // Smart edge selection: pick the best edges based on relative position
+                if (Math.abs(dx) > Math.abs(dy)) {
+                  // Horizontal-ish connection: use side edges
+                  const side = dx > 0 ? 1 : -1;
+                  startX = fromPos.x + (side * fromDims.w / 2);
+                  startY = fromPos.y;
+                  endX = toPos.x - (side * toDims.w / 2);
+                  endY = toPos.y;
+                  
+                  if (Math.abs(startY - endY) < 1) {
+                    // Perfectly horizontal
+                    path = `M ${startX} ${startY} L ${endX} ${endY}`;
+                  } else {
+                    // Orthogonal horizontal
+                    const midX = (startX + endX) / 2;
+                    path = `M ${startX} ${startY} L ${midX} ${startY} L ${midX} ${endY} L ${endX} ${endY}`;
+                  }
+                } else {
+                  // Vertical-ish connection: use top/bottom edges
+                  const side = dy > 0 ? 1 : -1;
+                  startX = fromPos.x;
+                  startY = fromPos.y + (side * fromDims.h / 2);
+                  endX = toPos.x;
+                  endY = toPos.y - (side * toDims.h / 2);
+                  
+                  if (Math.abs(startX - endX) < 1) {
+                    // Perfectly vertical
+                    path = `M ${startX} ${startY} L ${endX} ${endY}`;
+                  } else {
+                    // Orthogonal vertical (Tree style)
+                    const midY = (startY + endY) / 2;
+                    path = `M ${startX} ${startY} L ${startX} ${midY} L ${endX} ${midY} L ${endX} ${endY}`;
+                  }
+                }
                 
-                const path = `M ${fromPos.x} ${fromPos.y} C ${midX} ${fromPos.y}, ${midX} ${toPos.y}, ${toPos.x} ${toPos.y}`;
+                const isActive = isLinkActive(link.from, link.to);
 
                 return (
-                  <path 
+                  <g 
                     key={i} 
-                    d={path} 
-                    fill="none" 
-                    stroke="#444" 
-                    strokeWidth="2" 
-                    strokeOpacity="0.2"
-                    className="transition-all duration-500"
-                  />
+                    className="cursor-pointer pointer-events-auto group/link"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedNodeId(toNode.id);
+                    }}
+                  >
+                    {/* Invisible wider path for easier clicking */}
+                    <path
+                      d={path}
+                      fill="none"
+                      stroke="transparent"
+                      strokeWidth="20"
+                    />
+                    
+                    {/* Background glow for active paths */}
+                    {isActive && (
+                      <motion.path
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.3 }}
+                        d={path}
+                        fill="none"
+                        stroke="#2563eb"
+                        strokeWidth="10"
+                        strokeLinecap="round"
+                        className="blur-md"
+                      />
+                    )}
+                    
+                    <motion.path 
+                      d={path} 
+                      fill="none" 
+                      stroke="#2563eb" 
+                      strokeWidth={isActive ? "3" : "2"} 
+                      strokeOpacity={isActive ? "1" : "0.2"}
+                      markerEnd="url(#arrowhead)"
+                      className="transition-all duration-300"
+                      animate={isActive ? {
+                        strokeDasharray: ["0, 10", "10, 0"],
+                        transition: { repeat: Infinity, duration: 1.5, ease: "linear" }
+                      } : {}}
+                    />
+
+                    {/* Hover effect for the link itself */}
+                    <path
+                      d={path}
+                      fill="none"
+                      stroke="#2563eb"
+                      strokeWidth="4"
+                      strokeOpacity="0"
+                      className="group-hover/link:stroke-opacity-20 transition-opacity"
+                    />
+                  </g>
                 );
               })}
             </svg>
@@ -309,14 +424,28 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
                 const isLeaf = node.type === 'leaf';
 
                 const bgColor = isCore 
-                  ? 'bg-white border-4 border-blue-600' 
+                  ? 'bg-white border-2 border-blue-500' 
                   : colors[i % colors.length];
+
+                const isHovered = hoveredNodeId === node.id;
+                const isSelected = selectedNodeId === node.id;
+                const isRelated = hoveredNodeId && (
+                  node.id === hoveredNodeId || 
+                  node.parentId === hoveredNodeId || 
+                  nodes.find(n => n.id === hoveredNodeId)?.parentId === node.id
+                );
 
                 return (
                   <motion.div
                     key={node.id}
                     initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    animate={{ 
+                      opacity: hoveredNodeId ? (isRelated ? 1 : 0.4) : 1, 
+                      scale: isHovered ? 1.05 : 1,
+                      boxShadow: isHovered || isSelected ? '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)' : '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)'
+                    }}
+                    onMouseEnter={() => setHoveredNodeId(node.id)}
+                    onMouseLeave={() => setHoveredNodeId(null)}
                     style={{ 
                       left: pos.x, 
                       top: pos.y, 
@@ -325,11 +454,13 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
                     }}
                     className={`
                       flex items-center justify-center text-center transition-all cursor-pointer
-                      ${isCore ? 'w-56 h-24 rounded-2xl shadow-2xl z-20' : ''}
-                      ${isBranch ? 'px-6 py-3 rounded-full shadow-lg z-10 min-w-[140px]' : ''}
-                      ${isLeaf ? 'px-4 py-2 rounded-full shadow-md z-0 min-w-[100px]' : ''}
+                      ${isCore ? 'w-64 h-24 rounded-xl z-20' : ''}
+                      ${isBranch ? 'w-48 h-14 rounded-lg z-10' : ''}
+                      ${isLeaf ? 'w-40 h-10 rounded-md z-0' : ''}
                       ${bgColor}
                       ${editingNodeId === node.id ? 'ring-4 ring-blue-400 ring-offset-2' : ''}
+                      ${isSelected ? 'ring-2 ring-blue-600 ring-offset-2' : ''}
+                      ${isHovered ? 'brightness-110' : ''}
                     `}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -350,9 +481,11 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
                         font-bold uppercase tracking-wide
                         ${isCore ? 'text-blue-600 text-sm' : 'text-white text-[10px]'}
                         ${isLeaf ? 'text-[8px]' : ''}
-                      `}>
-                        {node.label}
-                      </span>
+                      `}
+                      style={isCore ? { fontFamily: 'Georgia, serif' } : undefined}
+                    >
+                      {node.label}
+                    </span>
                     )}
                   </motion.div>
                 );
@@ -362,22 +495,22 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
         </div>
 
         {/* Zoom Controls */}
-        <div className="absolute bottom-32 right-6 flex flex-col space-y-2 z-40">
+        <div className="absolute bottom-32 right-6 flex flex-col space-y-3 z-40">
           <button 
             onClick={() => setZoom(prev => Math.min(prev + 0.1, 2))}
-            className="p-3 bg-white border border-slate-100 rounded-xl shadow-lg text-slate-600 hover:text-blue-600 transition-colors"
+            className="p-3 bg-white rounded-full shadow-xl text-slate-400 hover:text-blue-600 transition-all active:scale-90"
           >
             <Plus size={20} />
           </button>
           <button 
             onClick={() => setZoom(prev => Math.max(prev - 0.1, 0.5))}
-            className="p-3 bg-white border border-slate-100 rounded-xl shadow-lg text-slate-600 hover:text-blue-600 transition-colors"
+            className="p-3 bg-white rounded-full shadow-xl text-slate-400 hover:text-blue-600 transition-all active:scale-90"
           >
             <Minus size={20} />
           </button>
           <button 
             onClick={() => { setZoom(1); setPan({ x: 0, y: 0 }); }}
-            className="p-3 bg-white border border-slate-100 rounded-xl shadow-lg text-slate-600 hover:text-blue-600 transition-colors"
+            className="p-3 bg-white rounded-full shadow-xl text-slate-400 hover:text-blue-600 transition-all active:scale-90"
           >
             <Maximize2 size={20} />
           </button>
@@ -385,7 +518,7 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
       </main>
 
       {/* AI Edit Bar */}
-      <div className="p-6 bg-white border-t border-slate-100 z-30 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+      <div className="p-6 bg-[#f0f7ff] border-t border-blue-100 z-30 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         <div className="max-w-3xl mx-auto relative group">
           <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center space-x-2">
             <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
@@ -397,7 +530,7 @@ const MindMapScreen: React.FC<MindMapScreenProps> = ({ preferences, unitName, on
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && generateMindMap(prompt)}
             placeholder="Ask Blue to modify this mind map..."
-            className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl py-4 pl-24 pr-24 text-sm font-bold outline-none focus:border-blue-600 focus:bg-white transition-all placeholder:text-slate-300"
+            className="w-full bg-blue-50/50 border-2 border-blue-100 rounded-2xl py-4 pl-24 pr-24 text-sm font-bold outline-none focus:border-blue-600 focus:bg-white transition-all placeholder:text-slate-300"
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-2">
             <button className="p-2 text-slate-400 hover:text-blue-600 transition-colors">

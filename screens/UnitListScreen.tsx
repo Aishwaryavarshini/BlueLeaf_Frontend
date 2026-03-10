@@ -25,10 +25,7 @@ const MATH_CLASS_9_UNITS = [
 
 const UnitListScreen: React.FC<UnitListScreenProps> = ({ preferences, subjectName, onBack, onSelectUnit, onProfileClick }) => {
   return (
-    <div className="h-full flex flex-col relative animate-fade-in overflow-hidden">
-      {/* GLOBAL STATIC BACKGROUND */}
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
-
+    <div className="h-full flex flex-col relative animate-fade-in overflow-hidden bg-[#eff6ff]">
       <DashboardHeader 
         preferences={preferences} 
         title={`Grade ${preferences.selectedClass} – ${subjectName}`} 
@@ -39,7 +36,7 @@ const UnitListScreen: React.FC<UnitListScreenProps> = ({ preferences, subjectNam
       <div className="px-6 py-4 flex items-center relative z-10">
         <button 
           onClick={onBack}
-          className="flex items-center bg-white border-2 border-[#2563eb] text-[#2563eb] px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest active:scale-[0.98] active:bg-blue-50 transition-all shadow-sm"
+          className="flex items-center bg-[#f0f7ff] border-2 border-[#2563eb] text-[#2563eb] px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest active:scale-[0.98] active:bg-blue-50 transition-all shadow-sm"
         >
           <svg viewBox="0 0 24 24" className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
             <path d="M15 18l-6-6 6-6" />
@@ -55,7 +52,7 @@ const UnitListScreen: React.FC<UnitListScreenProps> = ({ preferences, subjectNam
             <button
               key={index}
               onClick={() => onSelectUnit(unitName)}
-              className="w-full bg-white p-6 rounded-[2.25rem] border-2 border-[#2563eb]/20 flex flex-col items-start active:scale-[0.98] active:border-[#2563eb] active:bg-blue-50 transition-all text-left relative group overflow-hidden shadow-sm"
+              className="w-full bg-[#f0f7ff] p-6 rounded-[2.25rem] border-2 border-[#2563eb]/20 flex flex-col items-start active:scale-[0.98] active:border-[#2563eb] active:bg-blue-50 transition-all text-left relative group overflow-hidden shadow-sm"
             >
               <div className="flex justify-between w-full items-center mb-3">
                 <span className="text-[#2563eb] font-black text-[10px] uppercase tracking-[0.2em] bg-blue-50 px-3 py-1 rounded-full border border-[#2563eb]/10">

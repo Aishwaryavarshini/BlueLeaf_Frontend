@@ -187,9 +187,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
   };
 
   return (
-    <div className="h-full flex flex-col relative overflow-hidden bg-white">
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
-
+    <div className="h-full flex flex-col relative overflow-hidden bg-[#eff6ff]">
       {toastMessage && (
         <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[200] animate-slide-down">
           <div className="bg-slate-900/90 backdrop-blur-md px-6 py-3 rounded-full shadow-xl border border-white/10 flex items-center space-x-3">
@@ -198,7 +196,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
         </div>
       )}
 
-      <header className={`fixed top-0 left-0 right-0 z-50 bg-white shadow-lg flex items-center px-6 transition-all ${isCT ? 'h-40' : 'h-32'}`}>
+      <header className={`fixed top-0 left-0 right-0 z-50 bg-[#f0f7ff] shadow-lg flex items-center px-6 transition-all ${isCT ? 'h-40' : 'h-32'}`}>
         <div className="flex-1 flex flex-col text-[#2563eb] space-y-0.5">
           <h1 className="text-xl font-black uppercase truncate max-w-[240px]">
             {preferences.instituteName || "BlueLeaf Academy"}
@@ -218,7 +216,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
                       className={`px-3 py-1 rounded-lg border-2 text-[9px] font-black uppercase transition-all shadow-sm ${
                         viewMode === 'subject' && activeSubject === sub
                           ? 'bg-blue-600 text-white border-blue-600'
-                          : 'bg-white text-blue-600 border-blue-600/30 active:scale-95'
+                          : 'bg-[#f0f7ff] text-blue-600 border-blue-600/30 active:scale-95'
                       }`}
                     >
                       {sub}
@@ -227,7 +225,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
                   {viewMode === 'subject' && (
                     <button
                       onClick={() => { setViewMode('class'); handleBackToDashboard(); }}
-                      className="px-3 py-1 rounded-lg border-2 border-slate-200 text-slate-400 bg-white text-[9px] font-black uppercase shadow-sm active:scale-95"
+                      className="px-3 py-1 rounded-lg border-2 border-blue-100 text-slate-400 bg-[#f0f7ff] text-[9px] font-black uppercase shadow-sm active:scale-95"
                     >
                       Class Overview
                     </button>
@@ -271,7 +269,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
                 <button
                   key={student.id}
                   onClick={() => setSelectedStudent(student)}
-                  className="bg-white p-5 rounded-[2.5rem] border-2 border-white shadow-md flex flex-col items-start active:border-blue-600 transition-all text-left group"
+                  className="bg-[#f0f7ff] p-5 rounded-[2.5rem] border-2 border-blue-50 shadow-md flex flex-col items-start active:border-blue-600 transition-all text-left group"
                 >
                   <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-black text-xs mb-4">
                     {student.name[0]}
@@ -295,7 +293,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
                 </h2>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/95 p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
+                <div className="bg-[#f0f7ff]/95 p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
                     {viewMode === 'class' ? 'Class Pass Status' : 'Subject Pass %'}
                   </p>
@@ -308,7 +306,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
                     Good
                   </p>
                 </div>
-                <div className="bg-white/95 p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
+                <div className="bg-[#f0f7ff]/95 p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
                     {viewMode === 'class' ? 'Class Attendance' : 'Active Status'}
                   </p>
@@ -333,7 +331,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
                     return (
                       <div 
                         key={student.id} 
-                        className={`bg-white p-6 rounded-[3.5rem] border border-slate-100 shadow-md flex items-center space-x-6 transition-all duration-700 ${isAnimating ? 'opacity-100 border-blue-100' : 'opacity-60'}`}
+                        className={`bg-[#f0f7ff] p-6 rounded-[3.5rem] border border-blue-50 shadow-md flex items-center space-x-6 transition-all duration-700 ${isAnimating ? 'opacity-100 border-blue-100' : 'opacity-60'}`}
                       >
                         <ApprovalMascot isApproved={isAnimating} />
                         
@@ -405,7 +403,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
             {viewMode === 'subject' && (
               <>
                 <section className="animate-slide-up grid grid-cols-1 gap-6">
-                  <div className="bg-white p-8 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
+                  <div className="bg-[#f0f7ff] p-8 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
                     <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Curriculum Status</h3>
                     <div className="flex items-center">
                       <div className="h-40 w-40 shrink-0">
@@ -453,7 +451,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
                     </div>
                   </div>
 
-                  <div className="bg-white p-8 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
+                  <div className="bg-[#f0f7ff] p-8 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
                     <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Class Performance</h3>
                     <div className="h-56 w-full">
                       <ResponsiveContainer width="100%" height="100%">
@@ -504,7 +502,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
                   <h2 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4 ml-2">Subject Control</h2>
                   <div className="space-y-4">
                     {assignedClasses.map(cls => (
-                      <div key={cls} className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col space-y-5">
+                      <div key={cls} className="bg-[#f0f7ff] p-6 rounded-[2.5rem] border border-blue-50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col space-y-5">
                         <div className="flex items-center space-x-4">
                           <div className="w-14 h-14 rounded-3xl bg-blue-50 flex items-center justify-center text-[#2563eb] text-xl font-black shadow-sm border border-blue-100/50">
                             {cls.split(' ')[1]}
@@ -517,13 +515,13 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
                         <div className="grid grid-cols-2 gap-3 pt-2">
                           <button 
                             onClick={() => onSelectSubject(activeSubject!, cls)}
-                            className="py-3 px-4 bg-white border-2 border-[#2563eb] text-[#2563eb] rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-sm active:bg-blue-50 active:scale-95 transition-all"
+                            className="py-3 px-4 bg-[#f0f7ff] border-2 border-[#2563eb] text-[#2563eb] rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-sm active:bg-blue-50 active:scale-95 transition-all"
                           >
                             Manage Topics
                           </button>
                           <button 
                             onClick={() => setViewingClassStudents(cls)}
-                            className="py-3 px-4 bg-white border-2 border-[#2563eb] text-[#2563eb] rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-sm active:bg-blue-50 active:scale-95 transition-all"
+                            className="py-3 px-4 bg-[#f0f7ff] border-2 border-[#2563eb] text-[#2563eb] rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-sm active:bg-blue-50 active:scale-95 transition-all"
                           >
                             Student Insight
                           </button>
@@ -535,13 +533,13 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
 
                 <section className="animate-slide-up space-y-4">
                   <h2 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">Common Struggling Topics</h2>
-                  <div className="bg-white p-6 rounded-[2.5rem] border-2 border-blue-50 shadow-md space-y-6">
-                    <div className="flex p-1 bg-slate-100 rounded-2xl">
+                  <div className="bg-[#f0f7ff] p-6 rounded-[2.5rem] border-2 border-blue-50 shadow-md space-y-6">
+                    <div className="flex p-1 bg-blue-50 rounded-2xl">
                       {assignedClasses.map(cls => (
                         <button
                           key={cls}
                           onClick={() => setStrugglingClassToggle(cls)}
-                          className={`flex-1 py-2 text-[10px] font-black uppercase rounded-xl transition-all ${strugglingClassToggle === cls ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400'}`}
+                          className={`flex-1 py-2 text-[10px] font-black uppercase rounded-xl transition-all ${strugglingClassToggle === cls ? 'bg-[#f0f7ff] text-blue-600 shadow-sm' : 'text-slate-400'}`}
                         >
                           {cls}
                         </button>
@@ -565,8 +563,8 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
 
       {approvingStudent && (
         <div className="fixed inset-0 z-[150] flex items-center justify-center p-6">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-fade-in" onClick={() => setApprovingStudent(null)} />
-          <div className="relative w-full max-w-xs bg-white rounded-[2.5rem] p-8 shadow-2xl animate-slide-up text-center space-y-6">
+          <div className="absolute inset-0 bg-blue-900/40 backdrop-blur-sm animate-fade-in" onClick={() => setApprovingStudent(null)} />
+          <div className="relative w-full max-w-xs bg-[#f0f7ff] rounded-[2.5rem] p-8 shadow-2xl animate-slide-up text-center space-y-6">
             <div className="space-y-2">
               <h4 className="text-lg font-black text-slate-900 uppercase tracking-tight">Approve Student?</h4>
               <p className="text-xs font-medium text-slate-500 leading-relaxed">
@@ -582,7 +580,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
               </button>
               <button 
                 onClick={() => setApprovingStudent(null)}
-                className="w-full py-4 bg-white border-2 border-slate-100 text-slate-400 rounded-2xl text-xs font-black uppercase tracking-widest active:bg-slate-50 active:scale-95 transition-all"
+                className="w-full py-4 bg-[#f0f7ff] border-2 border-blue-100 text-slate-400 rounded-2xl text-xs font-black uppercase tracking-widest active:bg-blue-50 active:scale-95 transition-all"
               >
                 Cancel
               </button>
@@ -593,8 +591,8 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
 
       {rejectingStudent && (
         <div className="fixed inset-0 z-[150] flex items-center justify-center p-6">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-fade-in" onClick={() => setRejectingStudent(null)} />
-          <div className="relative w-full max-w-xs bg-white rounded-[2.5rem] p-8 shadow-2xl animate-slide-up text-center space-y-6">
+          <div className="absolute inset-0 bg-blue-900/40 backdrop-blur-sm animate-fade-in" onClick={() => setRejectingStudent(null)} />
+          <div className="relative w-full max-w-xs bg-[#f0f7ff] rounded-[2.5rem] p-8 shadow-2xl animate-slide-up text-center space-y-6">
             <div className="space-y-2">
               <h4 className="text-lg font-black text-slate-900 uppercase tracking-tight">Reject Student?</h4>
               <p className="text-xs font-medium text-slate-500 leading-relaxed">
@@ -604,13 +602,13 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
             <div className="flex flex-col space-y-2">
               <button 
                 onClick={handleConfirmRejection}
-                className="w-full py-4 bg-white border-2 border-red-100 text-red-600 rounded-2xl text-xs font-black uppercase tracking-widest active:bg-red-50 active:scale-95 transition-all"
+                className="w-full py-4 bg-[#f0f7ff] border-2 border-red-100 text-red-600 rounded-2xl text-xs font-black uppercase tracking-widest active:bg-red-50 active:scale-95 transition-all"
               >
                 Reject
               </button>
               <button 
                 onClick={() => setRejectingStudent(null)}
-                className="w-full py-4 bg-white border-2 border-slate-100 text-slate-400 rounded-2xl text-xs font-black uppercase tracking-widest active:bg-slate-50 active:scale-95 transition-all"
+                className="w-full py-4 bg-[#f0f7ff] border-2 border-blue-100 text-slate-400 rounded-2xl text-xs font-black uppercase tracking-widest active:bg-blue-50 active:scale-95 transition-all"
               >
                 Cancel
               </button>
@@ -621,9 +619,9 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
 
       {selectedStudent && (
         <div className="fixed inset-0 z-[100] flex items-end justify-center">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-md animate-fade-in" onClick={() => { setSelectedStudent(null); setSelectedProfileSubject(null); }} />
-          <div className="relative w-full h-[90%] bg-white rounded-t-[3.5rem] shadow-2xl animate-slide-up flex flex-col overflow-hidden">
-            <div className="w-full flex justify-center pt-5 pb-2 shrink-0"><div className="w-14 h-1.5 bg-slate-100 rounded-full" /></div>
+          <div className="absolute inset-0 bg-blue-900/40 backdrop-blur-md animate-fade-in" onClick={() => { setSelectedStudent(null); setSelectedProfileSubject(null); }} />
+          <div className="relative w-full h-[90%] bg-[#f0f7ff] rounded-t-[3.5rem] shadow-2xl animate-slide-up flex flex-col overflow-hidden">
+            <div className="w-full flex justify-center pt-5 pb-2 shrink-0"><div className="w-14 h-1.5 bg-blue-100 rounded-full" /></div>
             
             <div className="flex-1 overflow-y-auto px-7 py-6 pb-12">
               <div className="flex justify-between items-start mb-8">
@@ -662,7 +660,7 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ preferences, onLogo
                           <button 
                             key={s} 
                             onClick={() => setSelectedProfileSubject(selectedProfileSubject === s ? null : s)}
-                            className={`p-5 rounded-3xl border-2 transition-all text-left flex flex-col space-y-3 ${selectedProfileSubject === s ? 'bg-blue-50 border-blue-600' : 'bg-white border-slate-50 shadow-sm'}`}
+                            className={`p-5 rounded-3xl border-2 transition-all text-left flex flex-col space-y-3 ${selectedProfileSubject === s ? 'bg-blue-50 border-blue-600' : 'bg-[#f0f7ff] border-blue-50 shadow-sm'}`}
                           >
                             <div className="flex justify-between items-center w-full">
                               <span className="font-black text-slate-800">{s}</span>

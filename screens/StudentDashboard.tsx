@@ -160,8 +160,6 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
         }
       `}</style>
 
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
-
       <DashboardHeader 
         preferences={preferences} 
         title="Dashboard" 
@@ -183,11 +181,11 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
 
       <div className="flex-1 overflow-y-auto relative z-10">
         <div className="px-6 mt-6">
-          <div className="flex bg-white/20 backdrop-blur-md p-1 rounded-2xl border border-white/30">
+          <div className="flex bg-blue-100/20 backdrop-blur-md p-1 rounded-2xl border border-white/30">
             <button
               onClick={() => setActiveTab('main')}
               className={`flex-1 py-2.5 text-sm font-bold rounded-xl transition-all duration-200 active:scale-[0.98] ${
-                activeTab === 'main' ? 'bg-white text-[#2563eb] shadow-sm' : 'text-white'
+                activeTab === 'main' ? 'bg-[#f0f7ff] text-[#2563eb] shadow-sm' : 'text-white'
               }`}
             >
               {mainTabLabel}
@@ -195,7 +193,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
             <button
               onClick={() => setActiveTab('notes')}
               className={`flex-1 py-2.5 text-sm font-bold rounded-xl transition-all duration-200 active:scale-[0.98] ${
-                activeTab === 'notes' ? 'bg-white text-[#2563eb] shadow-sm' : 'text-white'
+                activeTab === 'notes' ? 'bg-[#f0f7ff] text-[#2563eb] shadow-sm' : 'text-white'
               }`}
             >
               My Notes
@@ -217,7 +215,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                     <button
                       key={subject.name}
                       onClick={() => handleSubjectClick(subject.name)}
-                      className="flex-shrink-0 w-[260px] aspect-[4/5] bg-gradient-to-br from-white to-blue-50 rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col justify-end snap-center border-4 border-white transition-all active:scale-[0.97] group"
+                      className="flex-shrink-0 w-[260px] aspect-[4/5] bg-gradient-to-br from-[#f0f7ff] to-blue-50 rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col justify-end snap-center border-4 border-[#f0f7ff] transition-all active:scale-[0.97] group"
                     >
                       {/* Mascot Image Background - Layered Behind */}
                       <div className="absolute inset-x-0 top-0 h-[85%] flex items-center justify-center p-8 pb-20 pointer-events-none transition-transform group-active:scale-105">
@@ -234,7 +232,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
 
                       {/* Foreground Button - Partially Overlapping */}
                       <div className="relative z-10 w-full p-6 pt-0">
-                        <div className="w-full py-5 bg-white rounded-[2rem] shadow-xl border border-blue-50 flex items-center justify-center group-active:bg-blue-50 transition-colors">
+                        <div className="w-full py-5 bg-[#f0f7ff] rounded-[2rem] shadow-xl border border-blue-50 flex items-center justify-center group-active:bg-blue-50 transition-colors">
                           <span className="font-black text-[#2563eb] text-sm uppercase tracking-[0.15em] leading-none">
                             {subject.name}
                           </span>
@@ -271,7 +269,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
             <div className="flex flex-col animate-fade-in space-y-6 px-6">
               {notes.length === 0 ? (
                 <div className="flex flex-col items-center justify-center text-center space-y-4 py-20">
-                  <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-[2rem] flex items-center justify-center mb-2 border border-white/20">
+                  <div className="w-20 h-20 bg-blue-100/10 backdrop-blur-sm rounded-[2rem] flex items-center justify-center mb-2 border border-white/20">
                     <svg viewBox="0 0 24 24" className="w-10 h-10 text-white/50" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><line x1="9" y1="15" x2="15" y2="15" /></svg>
                   </div>
                   <p className="text-white font-medium">No notes uploaded yet</p>
@@ -279,7 +277,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
               ) : (
                 <div className="space-y-4 animate-slide-up">
                   {notes.map(note => (
-                    <div key={note.id} className="bg-white p-6 rounded-[2.5rem] shadow-lg border border-[#2563eb]/10 flex items-center justify-between group">
+                    <div key={note.id} className="bg-[#f0f7ff] p-6 rounded-[2.5rem] shadow-lg border border-[#2563eb]/10 flex items-center justify-between group">
                       <div className="flex-1 space-y-1">
                         <div className="flex items-center space-x-2">
                           <span className="text-[10px] font-black text-[#2563eb] uppercase tracking-widest bg-blue-50 px-2 py-0.5 rounded-full">{note.subject}</span>
@@ -289,7 +287,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{note.unit !== 'None' ? `Unit: ${note.unit}` : 'Personal Note'}</p>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <button className="p-3 bg-slate-50 text-[#2563eb] rounded-2xl active:bg-blue-100 transition-all"><svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="3"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg></button>
+                        <button className="p-3 bg-blue-50 text-[#2563eb] rounded-2xl active:bg-blue-100 transition-all"><svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="3"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg></button>
                         <button onClick={() => deleteNote(note.id)} className="p-3 bg-red-50 text-red-500 rounded-2xl active:bg-red-100 transition-all"><svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="3"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg></button>
                       </div>
                     </div>
@@ -300,7 +298,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
               <div className="sticky bottom-0 pb-4">
                 <button 
                   onClick={() => setIsUploadModalOpen(true)}
-                  className="w-full bg-white border-2 border-[#2563eb] border-dashed p-8 rounded-[3rem] flex flex-col items-center justify-center space-y-3 active:scale-[0.98] active:bg-blue-50 active:border-solid transition-all group shadow-xl"
+                  className="w-full bg-[#f0f7ff] border-2 border-[#2563eb] border-dashed p-8 rounded-[3rem] flex flex-col items-center justify-center space-y-3 active:scale-[0.98] active:bg-blue-50 active:border-solid transition-all group shadow-xl"
                 >
                   <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center border border-[#2563eb]/10">
                     <svg viewBox="0 0 24 24" className="w-6 h-6 text-[#2563eb]" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
@@ -317,9 +315,9 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
       {/* NOTES UPLOAD MODAL - STEPPED INTERACTION */}
       {isUploadModalOpen && (
         <div className="fixed inset-0 z-[200] flex items-end justify-center">
-          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-fade-in" onClick={resetUpload} />
-          <div className="relative w-full h-[90%] bg-white rounded-t-[4rem] shadow-2xl animate-slide-up flex flex-col overflow-hidden">
-            <div className="w-full flex justify-center pt-5 pb-2 shrink-0"><div className="w-14 h-1.5 bg-slate-100 rounded-full" /></div>
+          <div className="absolute inset-0 bg-blue-900/60 backdrop-blur-sm animate-fade-in" onClick={resetUpload} />
+          <div className="relative w-full h-[90%] bg-[#f0f7ff] rounded-t-[4rem] shadow-2xl animate-slide-up flex flex-col overflow-hidden">
+            <div className="w-full flex justify-center pt-5 pb-2 shrink-0"><div className="w-14 h-1.5 bg-blue-100 rounded-full" /></div>
             
             <div className="flex-1 overflow-y-auto px-10 pt-6 pb-20 space-y-8">
               <div className="flex justify-between items-center">
@@ -343,7 +341,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                         if (file) { setSelectedFile(file); setUploadStep(2); }
                       }}
                     />
-                    <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm border border-blue-100">
+                    <div className="w-14 h-14 bg-[#f0f7ff] rounded-2xl flex items-center justify-center shadow-sm border border-blue-100">
                       <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#2563eb]" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
                     </div>
                     <div className="text-center">
@@ -364,14 +362,14 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                   <div className="space-y-3">
                     <button 
                       onClick={() => { setNoteAutoSplit(true); setUploadStep(3); }}
-                      className="w-full p-6 bg-white border-2 border-[#2563eb] rounded-[2.5rem] text-left group active:bg-blue-600 transition-all shadow-md"
+                      className="w-full p-6 bg-[#f0f7ff] border-2 border-[#2563eb] rounded-[2.5rem] text-left group active:bg-blue-600 transition-all shadow-md"
                     >
                       <h5 className="font-black text-[#2563eb] group-active:text-white uppercase tracking-tight">Auto-split into micro-lessons</h5>
                       <p className="text-slate-400 group-active:text-white/70 text-[10px] font-bold uppercase tracking-tighter mt-1">AI segments content into manageable topics</p>
                     </button>
                     <button 
                       onClick={() => { setNoteAutoSplit(false); setUploadStep(3); }}
-                      className="w-full p-6 bg-white border-2 border-slate-100 rounded-[2.5rem] text-left group active:border-[#2563eb] transition-all shadow-sm"
+                      className="w-full p-6 bg-[#f0f7ff] border-2 border-blue-100 rounded-[2.5rem] text-left group active:border-[#2563eb] transition-all shadow-sm"
                     >
                       <h5 className="font-black text-slate-800 uppercase tracking-tight">Keep as single note</h5>
                       <p className="text-slate-400 text-[10px] font-bold uppercase tracking-tighter mt-1">Store exactly as uploaded, no splitting</p>
@@ -398,12 +396,12 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                     {dropdownSubjectOpen && (
                       <>
                         <div className="fixed inset-0 z-[120] bg-transparent" onClick={() => setDropdownSubjectOpen(false)} />
-                        <div className="absolute left-0 right-0 mt-2 bg-white border-2 border-slate-100 rounded-[2rem] shadow-2xl z-[130] overflow-hidden !opacity-100">
+                        <div className="absolute left-0 right-0 mt-2 bg-[#f0f7ff] border-2 border-blue-100 rounded-[2rem] shadow-2xl z-[130] overflow-hidden !opacity-100">
                           {['Mathematics', 'Science', 'Tamil', 'English', 'Social Science'].map(s => (
                             <button 
                               key={s} 
                               onClick={() => { setNoteSubject(s); setDropdownSubjectOpen(false); setUploadStep(4); }}
-                              className="w-full p-5 text-left font-black text-slate-700 hover:bg-blue-50 border-b border-slate-50 last:border-0 uppercase text-[11px] tracking-widest"
+                              className="w-full p-5 text-left font-black text-slate-700 hover:bg-blue-50 border-b border-blue-50 last:border-0 uppercase text-[11px] tracking-widest"
                             >
                               {s}
                             </button>
@@ -433,12 +431,12 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                     {dropdownUnitOpen && (
                       <>
                         <div className="fixed inset-0 z-[120] bg-transparent" onClick={() => setDropdownUnitOpen(false)} />
-                        <div className="absolute left-0 right-0 mt-2 bg-white border-2 border-slate-100 rounded-[2rem] shadow-2xl z-[130] overflow-hidden !opacity-100">
+                        <div className="absolute left-0 right-0 mt-2 bg-[#f0f7ff] border-2 border-blue-100 rounded-[2rem] shadow-2xl z-[130] overflow-hidden !opacity-100">
                           {['None / Personal Note', 'Algebra', 'Geometry', 'Motion', 'Measurements'].map(u => (
                             <button 
                               key={u} 
                               onClick={() => { setNoteUnit(u); setDropdownUnitOpen(false); setUploadStep(noteAutoSplit ? 5 : 6); }}
-                              className="w-full p-5 text-left font-black text-slate-700 hover:bg-blue-50 border-b border-slate-50 last:border-0 uppercase text-[11px] tracking-widest"
+                              className="w-full p-5 text-left font-black text-slate-700 hover:bg-blue-50 border-b border-blue-50 last:border-0 uppercase text-[11px] tracking-widest"
                             >
                               {u}
                             </button>
@@ -460,14 +458,14 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                   <div className="space-y-3">
                     <button 
                       onClick={() => { setNoteScope('unit'); setUploadStep(6); }}
-                      className="w-full p-6 bg-white border-2 border-[#2563eb] rounded-[2.5rem] text-left group active:bg-blue-600 shadow-md"
+                      className="w-full p-6 bg-[#f0f7ff] border-2 border-[#2563eb] rounded-[2.5rem] text-left group active:bg-blue-600 shadow-md"
                     >
                       <h5 className="font-black text-[#2563eb] group-active:text-white uppercase tracking-tight">Full Unit Content</h5>
                       <p className="text-slate-400 group-active:text-white/70 text-[10px] font-bold uppercase tracking-tighter mt-1">May suggest multiple new micro-lessons</p>
                     </button>
                     <button 
                       onClick={() => { setNoteScope('lesson'); setUploadStep(6); }}
-                      className="w-full p-6 bg-white border-2 border-slate-100 rounded-[2.5rem] text-left group active:border-[#2563eb] shadow-sm"
+                      className="w-full p-6 bg-[#f0f7ff] border-2 border-blue-100 rounded-[2.5rem] text-left group active:border-[#2563eb] shadow-sm"
                     >
                       <h5 className="font-black text-slate-800 uppercase tracking-tight">Single Lesson Only</h5>
                       <p className="text-slate-400 text-[10px] font-bold uppercase tracking-tighter mt-1">AI stays focused on this topic</p>

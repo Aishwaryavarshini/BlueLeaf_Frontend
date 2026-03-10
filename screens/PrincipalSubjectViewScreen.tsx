@@ -72,12 +72,9 @@ const PrincipalSubjectViewScreen: React.FC<PrincipalSubjectViewScreenProps> = ({
   }, [activeSectionFilter]);
 
   return (
-    <div className="h-full flex flex-col relative overflow-hidden bg-slate-50">
-      {/* STATIC APP BACKGROUND */}
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-slate-50 z-0 pointer-events-none" />
-
+    <div className="h-full flex flex-col relative overflow-hidden bg-[#eff6ff]">
       {/* FIXED HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white h-32 shadow-lg flex flex-col px-6 justify-center">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#f0f7ff] h-32 shadow-lg flex flex-col px-6 justify-center">
         {/* Breadcrumbs */}
         <nav className="flex items-center space-x-2 mb-2">
           <button onClick={onGoToDashboard} className="text-[9px] font-black text-slate-400 uppercase tracking-widest hover:text-blue-600 transition-colors">Principal Dashboard</button>
@@ -114,22 +111,22 @@ const PrincipalSubjectViewScreen: React.FC<PrincipalSubjectViewScreenProps> = ({
         
         {/* A. Overall Subject Metrics */}
         <section className="animate-fade-in grid grid-cols-2 gap-4">
-          <div className="bg-white p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
+          <div className="bg-[#f0f7ff] p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Avg Mastery</p>
             <span className="text-3xl font-black text-slate-900 leading-none">88%</span>
             <p className="text-[8px] font-black text-green-500 uppercase mt-2">Excellent</p>
           </div>
-          <div className="bg-white p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
+          <div className="bg-[#f0f7ff] p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Quiz Perf.</p>
             <span className="text-3xl font-black text-slate-900 leading-none">82%</span>
             <p className="text-[8px] font-black text-blue-500 uppercase mt-2">Above Avg</p>
           </div>
-          <div className="bg-white p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
+          <div className="bg-[#f0f7ff] p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Avg Time</p>
             <span className="text-3xl font-black text-slate-900 leading-none">42m</span>
             <p className="text-[8px] font-black text-slate-400 uppercase mt-2">Per Session</p>
           </div>
-          <div className="bg-white p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
+          <div className="bg-[#f0f7ff] p-6 rounded-[2.5rem] border border-blue-50 shadow-lg flex flex-col">
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Completion</p>
             <span className="text-3xl font-black text-slate-900 leading-none">74%</span>
             <p className="text-[8px] font-black text-blue-500 uppercase mt-2">Syllabus</p>
@@ -138,7 +135,7 @@ const PrincipalSubjectViewScreen: React.FC<PrincipalSubjectViewScreenProps> = ({
 
         {/* B. Class-wise Subject Performance */}
         <section className="animate-slide-up">
-          <div className="bg-white p-8 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
+          <div className="bg-[#f0f7ff] p-8 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
             <div className="flex justify-between items-center">
               <div className="flex flex-col">
                 <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Section Performance</h3>
@@ -164,7 +161,7 @@ const PrincipalSubjectViewScreen: React.FC<PrincipalSubjectViewScreenProps> = ({
                     }
                   }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#bfdbfe" />
                   <XAxis 
                     dataKey="name" 
                     axisLine={false} 
@@ -179,7 +176,7 @@ const PrincipalSubjectViewScreen: React.FC<PrincipalSubjectViewScreenProps> = ({
                     domain={[0, 100]}
                   />
                   <Tooltip 
-                    cursor={{ fill: '#f8fafc' }}
+                    cursor={{ fill: '#dbeafe' }}
                     contentStyle={{ borderRadius: '1rem', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
                   />
                   <Bar dataKey="mastery" radius={[8, 8, 0, 0]} barSize={40}>
@@ -199,7 +196,7 @@ const PrincipalSubjectViewScreen: React.FC<PrincipalSubjectViewScreenProps> = ({
 
         {/* C. Student Status Breakdown */}
         <section className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <div className="bg-white p-8 rounded-[3rem] border border-blue-50 shadow-xl flex items-center">
+          <div className="bg-[#f0f7ff] p-8 rounded-[3rem] border border-blue-50 shadow-xl flex items-center">
             <div className="h-48 w-48 shrink-0">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -247,7 +244,7 @@ const PrincipalSubjectViewScreen: React.FC<PrincipalSubjectViewScreenProps> = ({
               <button
                 key={student.id}
                 onClick={() => onSelectStudent(student)}
-                className="bg-white p-5 rounded-[2.5rem] border-2 border-white shadow-md flex items-center justify-between active:border-blue-600 transition-all text-left group"
+                className="bg-[#f0f7ff] p-5 rounded-[2.5rem] border-2 border-blue-50 shadow-md flex items-center justify-between active:border-blue-600 transition-all text-left group"
               >
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 rounded-[1.5rem] bg-blue-50 flex items-center justify-center text-blue-600 font-black text-sm">
@@ -272,7 +269,7 @@ const PrincipalSubjectViewScreen: React.FC<PrincipalSubjectViewScreenProps> = ({
               </button>
             ))}
             {filteredStudents.length === 0 && (
-              <div className="py-10 text-center bg-white rounded-[2.5rem] border-2 border-dashed border-slate-100">
+              <div className="py-10 text-center bg-[#f0f7ff] rounded-[2.5rem] border-2 border-dashed border-blue-100">
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">No students found for this filter</p>
               </div>
             )}
@@ -282,7 +279,7 @@ const PrincipalSubjectViewScreen: React.FC<PrincipalSubjectViewScreenProps> = ({
         {/* E. Top / Bottom Topics */}
         <section className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
           <div className="grid grid-cols-1 gap-4">
-            <div className="bg-white p-8 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
+            <div className="bg-[#f0f7ff] p-8 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
               <h3 className="text-[10px] font-black text-green-500 uppercase tracking-[0.2em]">Strongest Topics</h3>
               <div className="space-y-3">
                 {topics.strong.map(topic => (
@@ -293,7 +290,7 @@ const PrincipalSubjectViewScreen: React.FC<PrincipalSubjectViewScreenProps> = ({
                 ))}
               </div>
             </div>
-            <div className="bg-white p-8 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
+            <div className="bg-[#f0f7ff] p-8 rounded-[3rem] border border-blue-50 shadow-xl space-y-6">
               <h3 className="text-[10px] font-black text-red-500 uppercase tracking-[0.2em]">Weakest Topics</h3>
               <div className="space-y-3">
                 {topics.weak.map(topic => (

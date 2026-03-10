@@ -33,7 +33,7 @@ const PrincipalDashboard: React.FC<PrincipalDashboardProps> = ({ preferences, on
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-white p-4 rounded-2xl shadow-2xl border border-blue-50 animate-in fade-in zoom-in duration-200">
+        <div className="bg-[#f0f7ff] p-4 rounded-2xl shadow-2xl border border-blue-100 animate-in fade-in zoom-in duration-200">
           <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-1">Class: {data.name}</p>
           <p className="text-xs font-bold text-slate-800">Students: {data.studentCount}</p>
           <p className="text-xs font-bold text-slate-800">Mastery: {data.performance}%</p>
@@ -44,12 +44,9 @@ const PrincipalDashboard: React.FC<PrincipalDashboardProps> = ({ preferences, on
   };
 
   return (
-    <div className="h-full flex flex-col relative overflow-hidden bg-white">
-      {/* STATIC APP BACKGROUND */}
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
-
+    <div className="h-full flex flex-col relative overflow-hidden bg-[#eff6ff]">
       {/* HEADER - STRICT FLAT RECTANGLE, WHITE BG, BLUE TEXT */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white flex items-center px-6 h-32 border-b border-slate-100">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#f0f7ff] flex items-center px-6 h-32 border-b border-blue-100">
         <div className="flex-1 flex flex-col text-[#2563eb] space-y-0.5">
           <h1 className="text-lg font-black uppercase tracking-tight leading-tight truncate">
             TAMIL NADU GOVERNMENT SCHOOL
@@ -77,7 +74,7 @@ const PrincipalDashboard: React.FC<PrincipalDashboardProps> = ({ preferences, on
         
         {/* STUDENT OVERVIEW SECTION - Horizontal Layout, Fixed Ring Chart */}
         <section className="animate-fade-in">
-          <div className="bg-white p-8 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.04)] flex items-center justify-between border border-slate-50 overflow-visible cursor-pointer hover:shadow-lg transition-all active:scale-[0.98] group">
+          <div className="bg-[#f0f7ff] p-8 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.04)] flex items-center justify-between border border-blue-50 overflow-visible cursor-pointer hover:shadow-lg transition-all active:scale-[0.98] group">
             <div className="flex flex-col">
               <p className="text-5xl font-black text-slate-900 tracking-tighter leading-none">1,420</p>
               <p className="text-[10px] font-black text-blue-600 uppercase mt-2 tracking-widest">TOTAL STUDENTS</p>
@@ -112,7 +109,7 @@ const PrincipalDashboard: React.FC<PrincipalDashboardProps> = ({ preferences, on
         <section className="animate-slide-up">
           <div 
             onClick={onAddStaff}
-            className="bg-white p-8 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.04)] relative border border-slate-50 cursor-pointer hover:shadow-lg transition-all active:scale-[0.98] group"
+            className="bg-[#f0f7ff] p-8 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.04)] relative border border-blue-50 cursor-pointer hover:shadow-lg transition-all active:scale-[0.98] group"
           >
             <div className="flex justify-between items-start mb-6">
               <div className="flex flex-col">
@@ -127,7 +124,7 @@ const PrincipalDashboard: React.FC<PrincipalDashboardProps> = ({ preferences, on
               </button>
             </div>
 
-            <div className="flex flex-col space-y-4 pt-6 border-t border-slate-50">
+            <div className="flex flex-col space-y-4 pt-6 border-t border-blue-50">
               <div className="flex justify-between items-center">
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">PRIMARY</p>
                 <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest">16</p>
@@ -142,7 +139,7 @@ const PrincipalDashboard: React.FC<PrincipalDashboardProps> = ({ preferences, on
 
         {/* PERFORMANCE ANALYTICS SECTION - Bar Graph */}
         <section className="animate-slide-up">
-          <div className="bg-white p-8 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-slate-50">
+          <div className="bg-[#f0f7ff] p-8 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-blue-50">
             <div className="mb-8">
               <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight">Class Performance Overview</h2>
               <p className="text-[10px] font-black text-blue-600 uppercase mt-2 tracking-widest">Mastery levels across all grades</p>
@@ -155,7 +152,7 @@ const PrincipalDashboard: React.FC<PrincipalDashboardProps> = ({ preferences, on
                   margin={{ top: 20, right: 10, left: -20, bottom: 0 }}
                   barGap={8}
                 >
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#bfdbfe" />
                   <XAxis 
                     dataKey="shortName" 
                     axisLine={false} 
@@ -171,7 +168,7 @@ const PrincipalDashboard: React.FC<PrincipalDashboardProps> = ({ preferences, on
                   />
                   <Tooltip 
                     content={<CustomTooltip />} 
-                    cursor={{ fill: '#f8fafc', opacity: 0.4 }}
+                    cursor={{ fill: '#dbeafe', opacity: 0.4 }}
                   />
                   <Bar 
                     dataKey="performance" 

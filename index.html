@@ -10,7 +10,7 @@
     <style>
       body {
         font-family: 'Inter', sans-serif;
-        background-color: #f8fafc;
+        background-color: #eff6ff;
         margin: 0;
         padding: 0;
         overflow-x: hidden;
@@ -43,6 +43,20 @@
       }
       .animate-slide-down {
         animation: slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .premium-bg {
+        background: 
+          radial-gradient(circle at 50% 0%, rgba(255,255,255,0.08), transparent 70%),
+          linear-gradient(
+            to bottom,
+            #1e3a8a 0%,
+            #2563eb 25%,
+            #60a5fa 55%,
+            #bfdbfe 80%,
+            #eff6ff 100%
+          );
+        background-attachment: fixed;
       }
     </style>
   <script type="importmap">

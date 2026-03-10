@@ -18,10 +18,8 @@ const SUBJECTS = [
 
 const PrincipalClassViewScreen: React.FC<PrincipalClassViewScreenProps> = ({ className, onBack, onSelectSubject, onGoToDashboard }) => {
   return (
-    <div className="h-full flex flex-col relative overflow-hidden bg-white animate-fade-in">
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
-
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white h-32 shadow-lg flex flex-col px-6 justify-center">
+    <div className="h-full flex flex-col relative overflow-hidden bg-[#eff6ff] animate-fade-in">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#f0f7ff] h-32 shadow-lg flex flex-col px-6 justify-center">
         {/* Breadcrumbs */}
         <nav className="flex items-center space-x-2 mb-2">
           <button onClick={onGoToDashboard} className="text-[9px] font-black text-slate-400 uppercase tracking-widest hover:text-blue-600 transition-colors">Principal Dashboard</button>
@@ -53,7 +51,7 @@ const PrincipalClassViewScreen: React.FC<PrincipalClassViewScreenProps> = ({ cla
               <button
                 key={subject.name}
                 onClick={() => onSelectSubject(subject.name)}
-                className="bg-white p-6 rounded-[2.5rem] border-2 border-white shadow-[0_10px_35px_-10px_rgba(0,0,0,0.08)] flex flex-col active:border-[#2563eb] active:ring-4 active:ring-[#2563eb]/10 active:bg-blue-50/50 transition-all text-left relative overflow-hidden group hover:-translate-y-1 hover:shadow-xl"
+                className="bg-[#f0f7ff] p-6 rounded-[2.5rem] border-2 border-blue-50 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.08)] flex flex-col active:border-[#2563eb] active:ring-4 active:ring-[#2563eb]/10 active:bg-blue-50/50 transition-all text-left relative overflow-hidden group hover:-translate-y-1 hover:shadow-xl"
               >
                 <div className="flex justify-between items-center mb-6">
                   <h4 className="text-lg font-black text-slate-800 leading-tight uppercase tracking-tight">{subject.name}</h4>
@@ -62,7 +60,7 @@ const PrincipalClassViewScreen: React.FC<PrincipalClassViewScreenProps> = ({ cla
                   </div>
                 </div>
 
-                <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-blue-100 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-blue-600 rounded-full transition-all duration-1000"
                     style={{ width: `${subject.mastery}%` }}

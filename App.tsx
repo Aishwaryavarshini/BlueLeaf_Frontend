@@ -402,7 +402,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-slate-50 flex flex-col">
+    <div className="min-h-screen w-full premium-bg flex flex-col">
       {renderScreen()}
     </div>
   );

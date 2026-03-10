@@ -1,7 +1,8 @@
 {
-  "name": "Gemini API key removal",
-  "description": "A mobile-first personalized learning platform designed for students and institutes, focusing on AI-guided growth and syllabus-aligned paths.",
+  "name": "BlueLeaf_Frontend",
+  "description": "Dropdown issue,gamification of Quiz, Design.",
   "requestFramePermissions": [
-    "microphone"
+    "microphone",
+    "camera"
   ]
 }

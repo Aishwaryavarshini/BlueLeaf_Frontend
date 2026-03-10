@@ -9,35 +9,35 @@ interface WelcomeScreenProps {
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onLogin }) => {
   return (
-    <div className="h-full flex flex-col items-center bg-gradient-to-b from-[#2563eb] from-0% via-[#2563eb] via-50% to-white to-70% animate-fade-in overflow-hidden">
+    <div className="h-[100dvh] flex flex-col items-center animate-fade-in overflow-hidden px-8">
       
-      {/* Top Section: Logo & Headline (Anchored in the Blue area) */}
-      <div className="pt-16 flex flex-col items-center w-full px-8 text-center">
-        <Logo size="lg" className="mb-10" />
+      {/* Top Section: Logo & Headline */}
+      <div className="pt-[10dvh] flex flex-col items-center w-full text-center">
+        <Logo size="lg" className="mb-[4dvh]" />
         
-        <h1 className="text-5xl font-black tracking-tight text-white mb-4 drop-shadow-md">
+        <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-2 drop-shadow-md">
           Learn smarter.
         </h1>
       </div>
 
-      {/* Main Content Group: Transitioning to the White area */}
-      <div className="flex-1 flex flex-col items-center justify-start w-full px-8 text-center pt-12">
+      {/* Main Content Group */}
+      <div className="flex-1 flex flex-col items-center justify-center w-full text-center">
         
-        {/* Subtext: Now clearly grounded in the white section */}
-        <div className="space-y-1.5 mb-12">
-          <p className="text-sm font-black tracking-[0.18em] text-blue-900/80 uppercase">
+        {/* Subtext */}
+        <div className="space-y-1 mb-[6dvh]">
+          <p className="text-xs sm:text-sm font-black tracking-[0.18em] text-blue-900/80 uppercase">
             AI THAT ADAPTS TO YOU
           </p>
-          <p className="text-sm font-black tracking-[0.18em] text-blue-900/80 uppercase">
+          <p className="text-xs sm:text-sm font-black tracking-[0.18em] text-blue-900/80 uppercase">
             INSIDE THE SYLLABUS.
           </p>
         </div>
 
-        {/* Action Section: Thumb reachable area, fully grounded in White */}
-        <div className="w-full max-w-sm space-y-6 mt-auto pb-16">
+        {/* Action Section: Thumb reachable area */}
+        <div className="w-full max-w-sm space-y-4 mt-auto pb-[8dvh]">
           <button
             onClick={onStart}
-            className="w-full py-5 bg-gradient-to-r from-[#2563eb] to-[#3b82f6] text-white font-bold text-xl rounded-full shadow-[0_12px_24px_-8px_rgba(37,99,235,0.45)] active:scale-[0.96] transition-all flex items-center justify-center group"
+            className="w-full py-4 sm:py-5 bg-gradient-to-r from-[#2563eb] to-[#3b82f6] text-white font-bold text-lg sm:text-xl rounded-full shadow-[0_12px_24px_-8px_rgba(37,99,235,0.45)] active:scale-[0.96] transition-all flex items-center justify-center group"
           >
             <span>Start Journey</span>
             <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>

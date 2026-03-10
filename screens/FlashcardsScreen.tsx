@@ -196,39 +196,39 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#2563eb] flex flex-col items-center justify-center p-6 text-white overflow-hidden">
+      <div className="min-h-screen bg-[#eff6ff] flex flex-col items-center justify-center p-6 text-[#2563eb] overflow-hidden">
         <div className="relative">
           <motion.div 
             animate={{ rotate: 360 }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-            className="w-32 h-32 border-4 border-white/20 border-t-white rounded-full"
+            className="w-32 h-32 border-4 border-[#2563eb]/20 border-t-[#2563eb] rounded-full"
           />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg animate-pulse">
+            <div className="w-16 h-16 bg-[#f0f7ff] rounded-2xl flex items-center justify-center shadow-lg animate-pulse border border-[#2563eb]/10">
               <span className="text-2xl">🎴</span>
             </div>
           </div>
         </div>
-        <h2 className="mt-12 text-xl font-black uppercase tracking-[0.3em] animate-pulse">Preparing Deck</h2>
-        <p className="mt-4 text-white/60 text-[10px] font-black uppercase tracking-widest">AI is crafting your flashcards...</p>
+        <h2 className="mt-12 text-xl font-black uppercase tracking-[0.3em] animate-pulse text-[#2563eb]">Preparing Deck</h2>
+        <p className="mt-4 text-[#2563eb]/60 text-[10px] font-black uppercase tracking-widest">AI is crafting your flashcards...</p>
       </div>
     );
   }
 
   if (showModeSelection) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col relative overflow-hidden">
-        <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
+      <div className="min-h-screen bg-[#eff6ff] flex flex-col relative overflow-hidden">
+        <div className="fixed inset-0 bg-gradient-to-b from-[#1e3a8a] via-[#2563eb] to-[#eff6ff] z-0 pointer-events-none opacity-10" />
         <DashboardHeader preferences={preferences} title="Flashcards" />
         
         <div className="flex-1 relative z-10 flex flex-col items-center justify-center px-6 pb-12">
           <motion.div 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="w-full max-w-md bg-white rounded-[3rem] shadow-2xl p-10 border-2 border-white"
+            className="w-full max-w-md bg-[#f0f7ff] rounded-[3rem] shadow-2xl p-10 border-2 border-blue-100"
           >
             <div className="text-center mb-10">
-              <div className="w-20 h-20 bg-blue-50 rounded-[2rem] flex items-center justify-center mx-auto mb-6 border-2 border-blue-100 shadow-sm">
+              <div className="w-20 h-20 bg-blue-100 rounded-[2rem] flex items-center justify-center mx-auto mb-6 border-2 border-blue-200 shadow-sm">
                 <span className="text-4xl">🎴</span>
               </div>
               <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight leading-tight mb-3">
@@ -242,7 +242,7 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
             <div className="space-y-4">
               <button 
                 onClick={() => { setDeckMode('speak'); setShowModeSelection(false); }}
-                className="w-full flex items-center justify-between bg-blue-50 hover:bg-blue-100 p-6 rounded-[2rem] border-2 border-blue-100 transition-all group active:scale-[0.98]"
+                className="w-full flex items-center justify-between bg-blue-50/50 hover:bg-blue-100 p-6 rounded-[2rem] border-2 border-blue-100 transition-all group active:scale-[0.98]"
               >
                 <div className="flex items-center space-x-5">
                   <div className="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-blue-600/20">
@@ -258,10 +258,10 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
 
               <button 
                 onClick={() => { setDeckMode('type'); setShowModeSelection(false); }}
-                className="w-full flex items-center justify-between bg-slate-50 hover:bg-slate-100 p-6 rounded-[2rem] border-2 border-slate-100 transition-all group active:scale-[0.98]"
+                className="w-full flex items-center justify-between bg-blue-50/50 hover:bg-blue-100 p-6 rounded-[2rem] border-2 border-blue-100 transition-all group active:scale-[0.98]"
               >
                 <div className="flex items-center space-x-5">
-                  <div className="w-12 h-12 bg-slate-800 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-slate-800/20">
+                  <div className="w-12 h-12 bg-blue-900 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-blue-900/20">
                     <Keyboard size={24} />
                   </div>
                   <div className="text-left">
@@ -269,12 +269,12 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
                     <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Text Input</span>
                   </div>
                 </div>
-                <ArrowRight size={20} className="text-slate-300 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={20} className="text-blue-300 group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button 
                 onClick={() => { setDeckMode('self'); setShowModeSelection(false); }}
-                className="w-full flex items-center justify-between bg-emerald-50 hover:bg-emerald-100 p-6 rounded-[2rem] border-2 border-emerald-100 transition-all group active:scale-[0.98]"
+                className="w-full flex items-center justify-between bg-emerald-50/50 hover:bg-emerald-100 p-6 rounded-[2rem] border-2 border-emerald-100 transition-all group active:scale-[0.98]"
               >
                 <div className="flex items-center space-x-5">
                   <div className="w-12 h-12 bg-emerald-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-600/20">
@@ -303,15 +303,15 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
 
   if (deck.length === 0) {
     return (
-      <div className="min-h-screen bg-[#2563eb] flex flex-col items-center justify-center p-6 text-white">
-        <div className="w-24 h-24 bg-white/20 rounded-3xl flex items-center justify-center mb-8">
+      <div className="min-h-screen bg-[#eff6ff] flex flex-col items-center justify-center p-6 text-[#2563eb]">
+        <div className="w-24 h-24 bg-blue-100/20 rounded-3xl flex items-center justify-center mb-8 border border-blue-200">
           <span className="text-4xl">📭</span>
         </div>
         <h2 className="text-2xl font-black uppercase tracking-widest mb-4">No Cards Found</h2>
-        <p className="text-white/60 text-center max-w-xs mb-8">We couldn't generate flashcards for this topic. Please try again.</p>
+        <p className="text-[#2563eb]/60 text-center max-w-xs mb-8">We couldn't generate flashcards for this topic. Please try again.</p>
         <button 
           onClick={onBack}
-          className="bg-white text-blue-600 px-8 py-4 rounded-2xl font-black uppercase tracking-widest shadow-xl active:scale-95 transition-all"
+          className="bg-[#2563eb] text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest shadow-xl active:scale-95 transition-all"
         >
           Go Back
         </button>
@@ -324,9 +324,9 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
     const greenCount = attempts.filter(a => a.status === 'green').length;
     
     return (
-      <div className="h-screen flex flex-col items-center justify-center p-10 bg-white animate-fade-in text-center">
-        <div className="w-28 h-28 bg-blue-50 rounded-[3rem] flex items-center justify-center mb-10 relative border-2 border-blue-100 shadow-xl">
-          <div className="absolute inset-0 bg-blue-100 rounded-[3rem] animate-ping opacity-20 scale-125"></div>
+      <div className="h-screen flex flex-col items-center justify-center p-10 bg-[#eff6ff] animate-fade-in text-center">
+        <div className="w-28 h-28 bg-blue-100 rounded-[3rem] flex items-center justify-center mb-10 relative border-2 border-blue-200 shadow-xl">
+          <div className="absolute inset-0 bg-blue-200 rounded-[3rem] animate-ping opacity-20 scale-125"></div>
           <span className="text-5xl">🌟</span>
         </div>
         <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight mb-4">Deck Finished</h2>
@@ -335,11 +335,11 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
         </p>
 
         <div className="grid grid-cols-2 gap-4 w-full max-w-sm mb-12">
-          <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100">
+          <div className="bg-[#f0f7ff] p-6 rounded-3xl border border-blue-100">
             <span className="block text-2xl font-black text-blue-600 mb-1">{greenCount}</span>
             <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Mastered</span>
           </div>
-          <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100">
+          <div className="bg-[#f0f7ff] p-6 rounded-3xl border border-blue-100">
             <span className="block text-2xl font-black text-blue-600 mb-1">{Math.floor(totalTime / 60)}m {totalTime % 60}s</span>
             <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Time Spent</span>
           </div>
@@ -356,10 +356,7 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
   }
 
   return (
-    <div className="h-screen flex flex-col relative bg-slate-50 overflow-hidden font-sans">
-      {/* Background Gradient */}
-      <div className="fixed inset-0 bg-gradient-to-b from-[#2563eb] to-white z-0 pointer-events-none" />
-      
+    <div className="h-screen flex flex-col relative bg-[#eff6ff] overflow-hidden font-sans">
       <DashboardHeader preferences={preferences} title="Flashcards" />
 
       {/* Progress Bar & Counter */}
@@ -367,16 +364,16 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
         <div className="flex items-center justify-between">
           <button 
             onClick={onBack}
-            className="flex items-center bg-white/20 backdrop-blur-md border border-white/30 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest active:scale-95 transition-all shadow-sm"
+            className="flex items-center bg-blue-100/20 backdrop-blur-md border border-blue-200/30 text-[#2563eb] px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest active:scale-95 transition-all shadow-sm"
           >
             <ArrowLeft size={14} className="mr-2" strokeWidth={3} />
             <span>Exit</span>
           </button>
-          <div className="bg-white/20 backdrop-blur-md border border-white/30 text-white px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
+          <div className="bg-blue-100/20 backdrop-blur-md border border-blue-200/30 text-[#2563eb] px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
             Card {currentIndex + 1} of {deck.length}
           </div>
         </div>
-        <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+        <div className="w-full h-1.5 bg-blue-200/20 rounded-full overflow-hidden">
           <motion.div 
             initial={{ width: 0 }}
             animate={{ width: `${((currentIndex + 1) / deck.length) * 100}%` }}
@@ -410,7 +407,7 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
                 onClick={handleFlip}
               >
                 {/* Front Side */}
-                <div className="absolute inset-0 w-full h-full bg-white rounded-[3rem] shadow-2xl border-2 border-white flex flex-col items-center justify-center p-10 backface-hidden">
+                <div className="absolute inset-0 w-full h-full bg-[#f0f7ff] rounded-[3rem] shadow-2xl border-2 border-blue-100 flex flex-col items-center justify-center p-10 backface-hidden">
                   <span className="text-[10px] font-black text-blue-600/30 uppercase tracking-[0.4em] mb-8">Concept</span>
                   <h3 className="text-2xl font-black text-slate-800 text-center leading-tight">
                     {currentCard.front}
@@ -423,13 +420,13 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
 
                 {/* Back Side */}
                 <div 
-                  className="absolute inset-0 w-full h-full bg-blue-50 rounded-[3rem] shadow-2xl border-4 border-white flex flex-col items-center justify-center p-10 backface-hidden"
+                  className="absolute inset-0 w-full h-full bg-blue-100 rounded-[3rem] shadow-2xl border-4 border-blue-200 flex flex-col items-center justify-center p-10 backface-hidden"
                   style={{ transform: 'rotateY(180deg)' }}
                 >
                   <span className="text-[10px] font-black text-blue-600/30 uppercase tracking-[0.4em] mb-6">Explanation</span>
                   <div className="text-center w-full overflow-y-auto max-h-full">
                     {(currentCard?.back || '').split('---').map((part, i) => (
-                      <p key={i} className={`text-lg font-bold leading-relaxed ${i > 0 ? 'mt-6 pt-6 border-t-2 border-white text-blue-600 italic' : 'text-slate-800'}`}>
+                      <p key={i} className={`text-lg font-bold leading-relaxed ${i > 0 ? 'mt-6 pt-6 border-t-2 border-blue-200 text-blue-600 italic' : 'text-slate-800'}`}>
                         {part.trim()}
                       </p>
                     ))}
@@ -447,14 +444,14 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
             <button 
               onClick={(e) => { e.stopPropagation(); handlePrev(); }}
               disabled={currentIndex === 0}
-              className={`w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-400 active:scale-90 transition-all pointer-events-auto ${currentIndex === 0 ? 'opacity-0' : 'opacity-100'}`}
+              className={`w-12 h-12 bg-[#f0f7ff] rounded-full shadow-lg flex items-center justify-center text-blue-400 active:scale-90 transition-all pointer-events-auto ${currentIndex === 0 ? 'opacity-0' : 'opacity-100'}`}
             >
               <ArrowLeft size={20} strokeWidth={3} />
             </button>
             <button 
               onClick={(e) => { e.stopPropagation(); handleNext(); }}
               disabled={currentIndex === deck.length - 1}
-              className={`w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-400 active:scale-90 transition-all pointer-events-auto ${currentIndex === deck.length - 1 ? 'opacity-0' : 'opacity-100'}`}
+              className={`w-12 h-12 bg-[#f0f7ff] rounded-full shadow-lg flex items-center justify-center text-blue-400 active:scale-90 transition-all pointer-events-auto ${currentIndex === deck.length - 1 ? 'opacity-0' : 'opacity-100'}`}
             >
               <ArrowRight size={20} strokeWidth={3} />
             </button>
@@ -469,7 +466,7 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className="fixed bottom-0 left-0 right-0 bg-white rounded-t-[3rem] p-8 pb-12 shadow-[0_-20px_50px_rgba(0,0,0,0.1)] z-30"
+            className="fixed bottom-0 left-0 right-0 bg-[#f0f7ff] rounded-t-[3rem] p-8 pb-12 shadow-[0_-20px_50px_rgba(0,0,0,0.1)] z-30"
           >
             {responseMode === 'speak' && (
               <div className="flex flex-col items-center space-y-8 py-4">
@@ -516,7 +513,7 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
                     value={userAnswer}
                     onChange={(e) => setUserAnswer(e.target.value)}
                     placeholder="Start typing here..."
-                    className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-5 text-sm font-bold outline-none focus:border-blue-600 focus:bg-white transition-all min-h-[120px] resize-none"
+                    className="w-full bg-blue-50/50 border-2 border-blue-100 rounded-2xl p-5 text-sm font-bold outline-none focus:border-blue-600 focus:bg-blue-50 transition-all min-h-[120px] resize-none"
                   />
                   <button 
                     onClick={() => handleEvaluate(userAnswer, 'type')}
@@ -576,7 +573,7 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="mt-6 p-6 rounded-3xl border-2 border-slate-50 bg-slate-50/50"
+                className="mt-6 p-6 rounded-3xl border-2 border-blue-50 bg-blue-50/30"
               >
                 <div className="flex items-center space-x-3 mb-4">
                   {aiResult.status === 'green' && <CheckCircle2 className="text-emerald-500" size={24} />}
@@ -597,7 +594,7 @@ const FlashcardsScreen: React.FC<FlashcardsScreenProps> = ({ preferences, unitNa
                     <h5 className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Key points to remember:</h5>
                     <div className="flex flex-wrap gap-2">
                       {aiResult.missedIdeas.map((idea: string, i: number) => (
-                        <span key={i} className="bg-white px-3 py-1 rounded-full text-[9px] font-bold text-slate-600 border border-slate-100 shadow-sm">
+                        <span key={i} className="bg-blue-50 px-3 py-1 rounded-full text-[9px] font-bold text-slate-600 border border-blue-100 shadow-sm">
                           {idea}
                         </span>
                       ))}
